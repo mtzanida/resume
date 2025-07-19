@@ -261,6 +261,12 @@ This repository initially used a GitHub Action to generate the PDF version of th
 
 5. **Faster Development Cycle**: You don't have to wait for GitHub Actions to run to see if the PDF was generated correctly.
 
+6. **Improved Reliability**: By generating the PDF locally, we avoid potential issues with GitHub Actions environment differences or service disruptions.
+
+7. **Better Version Control**: The PDF is always committed alongside the HTML changes that generated it, making the repository history cleaner and more logical.
+
+8. **No Extra Commits**: GitHub Actions would create additional commits just for PDF updates, cluttering the commit history. Pre-commit hooks avoid this by including the PDF in the original commit.
+
 ### Setting Up the Pre-commit Hook
 
 1. Install the pre-commit framework:
@@ -293,10 +299,10 @@ The pre-commit hook expects the styling repository to be available at `../stylin
 ### How It Works
 
 The pre-commit hook:
-1. Checks if you've modified `index.html` or `pdf-styles.css`
+1. Checks if you've modified `index.html` or `styling/pdf-styles-single-page.css`
 2. If so, it generates an updated PDF using pandoc and weasyprint
 3. Incorporates styling from the separate styling repository
-4. Adds the updated PDF to your commit automatically
+4. Adds the generated PDF to your commit automatically
 
 This approach ensures that your PDF is always in sync with your HTML content, without needing to rely on GitHub Actions.
 
