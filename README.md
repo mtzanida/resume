@@ -1,6 +1,6 @@
-# Personal Resume Website
+# Maria Tzanidaki - Resume Website
 
-This is a simple HTML/CSS resume website designed to be hosted on GitHub Pages.
+This is a personal resume website showcasing my professional experience, skills, and projects.
 
 ## Features
 
@@ -9,17 +9,32 @@ This is a simple HTML/CSS resume website designed to be hosted on GitHub Pages.
 - Sections for skills, experience, projects, and certifications
 - Contact information
 
-## Hosting
+## Hosting Options
 
-This site is hosted using GitHub Pages.
+This site can be hosted in several ways:
+
+1. **GitHub Pages**: Configure GitHub Pages in the repository settings
+2. **Netlify**: Connect this repository to Netlify for automatic deployments
+3. **Vercel**: Deploy using Vercel for a seamless experience
+
+## Local Development
+
+To view the site locally:
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/mtzanida/resume.git
+   ```
+
+2. Open the `index.html` file in your browser
 
 ## Customization
 
 To customize this resume:
 
-1. Edit the `index.html` file to update your personal information
+1. Edit the `index.html` file to update personal information
 2. Replace placeholder text with your own details
-3. Update links to your social media profiles
+3. Update links to social media profiles
 4. Modify the styling as needed
 
 ## License
