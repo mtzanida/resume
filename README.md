@@ -75,7 +75,7 @@ xdg-open index.html
 
 #### Option 2: Using GitHub Actions (Automated Deployment)
 
-This repository includes a GitHub Actions workflow that automatically deploys your site to GitHub Pages whenever you push changes to the main branch.
+GitHub automatically handles the deployment of your site to GitHub Pages through its built-in "pages build and deployment" workflow. Additionally, this repository includes a custom GitHub Actions workflow that generates a PDF version of your resume whenever you push changes to the main branch.
 
 1. Push your changes to GitHub:
    ```bash
@@ -87,7 +87,9 @@ This repository includes a GitHub Actions workflow that automatically deploys yo
 2. Go to your GitHub repository (https://github.com/mtzanida/resume)
 3. Click on "Settings" > "Pages" in the left sidebar
 4. Under "Source", select "GitHub Actions"
-5. Your site will be automatically deployed when you push to the main branch
+5. Two workflows will run automatically when you push to the main branch:
+   - GitHub's built-in "pages build and deployment" workflow handles the site deployment
+   - The custom "Resume PDF Generator" workflow generates and updates the PDF version of your resume
 6. Your site will be available at `https://mtzanida.github.io/resume/`
 
 ### Step 5: Add a Custom Domain (Optional)

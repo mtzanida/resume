@@ -1,26 +1,20 @@
-name: Resume Website Workflow
+name: Resume PDF Generator
+
+# Note: This workflow only handles PDF generation.
+# The actual GitHub Pages deployment is handled automatically by GitHub's built-in
+# "pages build and deployment" workflow.
 
 on:
   push:
-    branches: [ "feat/init" ]
+    branches: [ "main" ]
   workflow_dispatch:  # Allows manual triggering
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Sets permissions of the GITHUB_TOKEN to allow updating the PDF
 permissions:
   contents: write  # Needed for updating PDF
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  generate-pdf:
     runs-on: ubuntu-latest
     steps:
       # Checkout repository
@@ -44,16 +38,3 @@ jobs:
           git config --global user.email 'actions@github.com'
           git add assets/maria-tzanidaki-resume.pdf
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update PDF resume" && git push)
-
-      # Deploy to GitHub Pages
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
