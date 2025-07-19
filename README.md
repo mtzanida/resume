@@ -263,6 +263,24 @@ This repository initially used a GitHub Action to generate the PDF version of th
 
 ### Setting Up the Pre-commit Hook
 
+There are two ways to set up the pre-commit hook:
+
+#### Option 1: Using the pre-commit framework
+
+1. Install the pre-commit framework:
+   ```bash
+   pip install pre-commit
+   ```
+
+2. Install the hooks:
+   ```bash
+   pre-commit install
+   ```
+
+3. The `.pre-commit-config.yaml` file is already configured to run the PDF generation script.
+
+#### Option 2: Using the manual setup
+
 1. Run the setup script to install the pre-commit hook:
    ```bash
    ./setup-hooks.sh
@@ -273,14 +291,28 @@ This repository initially used a GitHub Action to generate the PDF version of th
    brew install pandoc weasyprint
    ```
 
-3. Now, whenever you make changes to `index.html` or `pdf-styles.css` and commit them, the PDF will be automatically generated and added to your commit.
+### Required Dependencies
+
+For both options, you need:
+- pandoc
+- weasyprint
+
+Install them with:
+```bash
+brew install pandoc weasyprint
+```
+
+### Styling Repository Integration
+
+The pre-commit hook expects the styling repository to be available at `../styling` relative to this repository. If your styling repository is located elsewhere, you'll need to update the path in the script.
 
 ### How It Works
 
 The pre-commit hook:
 1. Checks if you've modified `index.html` or `pdf-styles.css`
 2. If so, it generates an updated PDF using pandoc and weasyprint
-3. Adds the updated PDF to your commit automatically
+3. Incorporates styling from the separate styling repository
+4. Adds the updated PDF to your commit automatically
 
 This approach ensures that your PDF is always in sync with your HTML content, without needing to rely on GitHub Actions.
 
