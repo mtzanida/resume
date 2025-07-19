@@ -158,52 +158,73 @@ You can automatically generate a PDF version of your resume from the HTML file:
 
 This approach ensures your PDF resume is always in sync with your website content.
 
-#### Option 3: Automate PDF Generation with GitHub Actions
+#### Option 3: Automate PDF Generation and Deployment with GitHub Actions
 
-You can set up GitHub Actions to automatically generate the PDF whenever changes are pushed to the main branch:
+This repository includes a GitHub Actions workflow that automatically generates the PDF and deploys your site to GitHub Pages whenever you push changes to the main branch:
 
-1. Create a GitHub workflow file at `.github/workflows/generate-pdf.yml`:
+1. The workflow file is located at `.github/workflows/resume-workflow.yml`:
    ```yaml
-   name: Generate PDF Resume
+   name: Resume Website Workflow
 
    on:
      push:
-       branches: [ main ]
-       paths:
-         - 'index.html'
-         - 'pdf-styles.css'
+       branches: [ "main" ]
+     workflow_dispatch:  # Allows manual triggering
+
+   permissions:
+     contents: write  # Needed for updating PDF
+     pages: write
+     id-token: write
 
    jobs:
-     build:
+     build-and-deploy:
+       environment:
+         name: github-pages
+         url: ${{ steps.deployment.outputs.page_url }}
        runs-on: ubuntu-latest
        steps:
-         - uses: actions/checkout@v3
-
-         - name: Install dependencies
+         # Generate PDF resume
+         - name: Checkout
+           uses: actions/checkout@v3
+           
+         - name: Install PDF dependencies
            run: |
              sudo apt-get update
              sudo apt-get install -y pandoc weasyprint
-
+           
          - name: Generate PDF
            run: |
              pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
-
-         - name: Commit and push if changed
+           
+         # Commit updated PDF if changed
+         - name: Commit PDF if changed
            run: |
              git config --global user.name 'GitHub Actions'
              git config --global user.email 'actions@github.com'
              git add assets/maria-tzanidaki-resume.pdf
-             git diff --quiet && git diff --staged --quiet || git commit -m "Update PDF resume"
-             git push
+             git diff --quiet && git diff --staged --quiet || (git commit -m "Update PDF resume" && git push)
+           
+         # Deploy to GitHub Pages
+         - name: Setup Pages
+           uses: actions/configure-pages@v3
+           
+         - name: Upload artifact
+           uses: actions/upload-pages-artifact@v2
+           with:
+             path: '.'
+           
+         - name: Deploy to GitHub Pages
+           id: deployment
+           uses: actions/deploy-pages@v2
    ```
 
 2. This workflow will:
-   - Run whenever you push changes to `index.html` or `pdf-styles.css` on the main branch
-   - Install Pandoc and weasyprint
-   - Generate the PDF resume
+   - Run whenever you push changes to the main branch
+   - Generate the PDF resume using Pandoc and weasyprint
    - Commit and push the updated PDF to your repository
+   - Deploy your website to GitHub Pages
 
-This ensures your PDF resume is always up-to-date with your website content.
+This ensures your PDF resume is always up-to-date with your website content and your site is automatically deployed.
 
 ### Adding Google Analytics
 
