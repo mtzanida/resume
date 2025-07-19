@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Johnson - Senior Cloud Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gray: {
+                            950: '#030712',
+                            900: '#111827',
+                            800: '#1f2937',
+                            700: '#374151',
+                            600: '#4b5563',
+                            400: '#9ca3af',
+                            300: '#d1d5db',
+                            100: '#f3f4f6',
+                        },
+                        blue: {
+                            400: '#60a5fa',
+                        },
+                        green: {
+                            400: '#34d399',
+                        },
+                        purple: {
+                            400: '#a78bfa',
+                        },
+                        orange: {
+                            400: '#fb923c',
+                            500: '#f97316',
+                        },
+                        yellow: {
+                            400: '#facc15',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background-color: #030712;
+            color: #f3f4f6;
+        }
+        .card {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 0.5rem;
+            transition: border-color 0.2s;
+        }
+        .card:hover {
+            border-color: #374151;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-950 text-gray-100">
+    <!-- Header -->
+    <header class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-10">
+        <div class="max-w-4xl mx-auto px-6 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-white">Alex Johnson</h1>
+                    <p class="text-xl text-gray-400 mt-1">Senior Cloud Engineer</p>
+                </div>
+                <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-700 rounded-md hover:bg-gray-800 bg-transparent text-white transition-colors">
+                    <i class="fas fa-download mr-2 w-4 h-4"></i>
+                    Download CV
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+        <!-- About Section -->
+        <section>
+            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                <i class="fas fa-cloud text-blue-400 mr-3 w-6 h-6"></i>
+                About
+            </h2>
+            <div class="text-gray-300 text-lg leading-relaxed space-y-4">
+                <p>
+                    Passionate cloud engineer with 6+ years of experience designing and implementing scalable cloud
+                    infrastructure solutions. Specialized in multi-cloud architectures, DevOps practices, and infrastructure
+                    automation.
+                </p>
+                <p>
+                    Proven track record of reducing operational costs, improving system reliability, and accelerating
+                    development workflows through innovative cloud solutions.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Info -->
+        <section>
+            <h2 class="text-2xl font-semibold text-white mb-6">Contact</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-center text-gray-300">
+                    <i class="fas fa-envelope text-blue-400 mr-3 w-5 h-5"></i>
+                    alex.johnson@email.com
+                </div>
+                <div class="flex items-center text-gray-300">
+                    <i class="fas fa-phone text-blue-400 mr-3 w-5 h-5"></i>
+                    +1 (555) 123-4567
+                </div>
+                <div class="flex items-center text-gray-300">
+                    <i class="fas fa-map-marker-alt text-blue-400 mr-3 w-5 h-5"></i>
+                    San Francisco, CA
+                </div>
+                <div class="flex items-center text-gray-300">
+                    <i class="fab fa-linkedin text-blue-400 mr-3 w-5 h-5"></i>
+                    linkedin.com/in/alexjohnson
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section>
+            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                <i class="fas fa-code text-green-400 mr-3 w-6 h-6"></i>
+                Technical Skills
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="pb-3 px-6 pt-6">
+                        <h3 class="text-lg text-white">Cloud Platforms</h3>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">AWS</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Azure</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Google Cloud</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">DigitalOcean</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="pb-3 px-6 pt-6">
+                        <h3 class="text-lg text-white">Infrastructure</h3>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Terraform</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">CloudFormation</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Ansible</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Kubernetes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="pb-3 px-6 pt-6">
+                        <h3 class="text-lg text-white">DevOps</h3>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Docker</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Jenkins</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">GitLab CI</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">GitHub Actions</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="pb-3 px-6 pt-6">
+                        <h3 class="text-lg text-white">Monitoring</h3>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Prometheus</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Grafana</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">CloudWatch</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Datadog</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="pb-3 px-6 pt-6">
+                        <h3 class="text-lg text-white">Programming</h3>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Python</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Go</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Bash</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="pb-3 px-6 pt-6">
+                        <h3 class="text-lg text-white">Databases</h3>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">PostgreSQL</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">MongoDB</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Redis</span>
+                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">DynamoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section>
+            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                <i class="fas fa-server text-purple-400 mr-3 w-6 h-6"></i>
+                Experience
+            </h2>
+            <div class="space-y-8">
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="px-6 pt-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl text-white">Senior Cloud Engineer</h3>
+                                <p class="text-lg text-blue-400 mt-1">TechCorp Solutions</p>
+                            </div>
+                            <span class="badge border border-gray-600 text-gray-400">2022 - Present</span>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-4">
+                        <p class="text-gray-300 mb-4">Led cloud migration initiatives and infrastructure automation projects.</p>
+                        <ul class="space-y-2">
+                            <li class="text-gray-400 flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                Reduced infrastructure costs by 40% through optimization
+                            </li>
+                            <li class="text-gray-400 flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                Implemented CI/CD pipelines serving 50+ microservices
+                            </li>
+                            <li class="text-gray-400 flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                Designed disaster recovery solutions with 99.9% uptime
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="px-6 pt-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl text-white">Cloud Infrastructure Engineer</h3>
+                                <p class="text-lg text-blue-400 mt-1">CloudFirst Inc</p>
+                            </div>
+                            <span class="badge border border-gray-600 text-gray-400">2020 - 2022</span>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-4">
+                        <p class="text-gray-300 mb-4">Managed multi-cloud environments and automated deployment processes.</p>
+                        <ul class="space-y-2">
+                            <li class="text-gray-400 flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                Architected scalable Kubernetes clusters
+                            </li>
+                            <li class="text-gray-400 flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                Automated infrastructure provisioning with Terraform
+                            </li>
+                            <li class="text-gray-400 flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                Implemented comprehensive monitoring and alerting systems
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="px-6 pt-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl text-white">DevOps Engineer</h3>
+                                <p class="text-lg text-blue-400 mt-1">StartupXYZ</p>
+                            </div>
+                            <span class="badge border border-gray-600 text-gray-400">2018 - 2020</span>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-4">
+                        <p class="text-gray-300 mb-4">Built and maintained CI/CD pipelines and cloud infrastructure.</p>
+                        <ul class="space-y-2">
+                            <li class="text-gray-400 flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                Migrated legacy applications to containerized architecture
+                            </li>
+                            <li class="text-gray-400 flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                Established security best practices and compliance frameworks
+                            </li>
+                            <li class="text-gray-400 flex items-start">
+                                <span class="text-green-400 mr-2">•</span>
+                                Reduced deployment time from hours to minutes
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section>
+            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                <i class="fas fa-database text-orange-400 mr-3 w-6 h-6"></i>
+                Key Projects
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors">
+                    <div class="px-6 pt-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg text-white">Multi-Cloud Disaster Recovery</h3>
+                            <a href="#" class="text-gray-400 hover:text-white p-1 rounded-full hover:bg-gray-800 transition-colors">
+                                <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-4">
+                        <p class="text-gray-300 mb-4">Designed and implemented a cross-cloud disaster recovery solution using AWS and Azure.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge border border-gray-600 text-gray-400">AWS</span>
+                            <span class="badge border border-gray-600 text-gray-400">Azure</span>
+                            <span class="badge border border-gray-600 text-gray-400">Terraform</span>
+                            <span class="badge border border-gray-600 text-gray-400">Python</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors">
+                    <div class="px-6 pt-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg text-white">Kubernetes Monitoring Stack</h3>
+                            <a href="#" class="text-gray-400 hover:text-white p-1 rounded-full hover:bg-gray-800 transition-colors">
+                                <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-4">
+                        <p class="text-gray-300 mb-4">Built comprehensive monitoring solution for Kubernetes clusters with custom dashboards.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge border border-gray-600 text-gray-400">Kubernetes</span>
+                            <span class="badge border border-gray-600 text-gray-400">Prometheus</span>
+                            <span class="badge border border-gray-600 text-gray-400">Grafana</span>
+                            <span class="badge border border-gray-600 text-gray-400">Helm</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors">
+                    <div class="px-6 pt-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg text-white">Infrastructure as Code Framework</h3>
+                            <a href="#" class="text-gray-400 hover:text-white p-1 rounded-full hover:bg-gray-800 transition-colors">
+                                <i class="fas fa-external-link-alt w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-4">
+                        <p class="text-gray-300 mb-4">Created reusable Terraform modules for rapid cloud infrastructure deployment.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge border border-gray-600 text-gray-400">Terraform</span>
+                            <span class="badge border border-gray-600 text-gray-400">AWS</span>
+                            <span class="badge border border-gray-600 text-gray-400">GitLab CI</span>
+                            <span class="badge border border-gray-600 text-gray-400">Go</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section>
+            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+                <i class="fas fa-shield-alt text-yellow-400 mr-3 w-6 h-6"></i>
+                Certifications
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="px-6 py-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-white">AWS Solutions Architect Professional</h3>
+                                <p class="text-gray-400 text-sm">Amazon Web Services</p>
+                            </div>
+                            <span class="badge bg-orange-500/10 text-orange-400 border border-orange-500/20">2023</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-gray-900 border-gray-800">
+                    <div class="px-6 py-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-white">Certified Kubernetes Administrator</h3>
+                                <p class="text-gray-400 text-sm">Cloud Native Computing Foundation</p>
+                            </div>
+                            <span class="badge bg-blue-500/10 text-blue-400 border border-blue-500/20">2022</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 bg-gray-900/50 mt-16">
+        <div class="max-w-4xl mx-auto px-6 py-8">
+            <div class="flex items-center justify-between">
+                <p class="text-gray-400">© 2024 Alex Johnson. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
+                        <i class="fab fa-github w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
+                        <i class="fab fa-linkedin w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
