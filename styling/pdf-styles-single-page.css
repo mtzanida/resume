@@ -1,0 +1,122 @@
+/* PDF Styles for Single-Page Resume */
+@page {
+  size: letter;
+  margin: 0.5cm;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.3;
+  color: #333;
+  max-width: 100%;
+  font-size: 9pt;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 16pt;
+  color: #1a365d;
+  margin-top: 0.3cm;
+  margin-bottom: 0.2cm;
+}
+
+h2 {
+  font-size: 12pt;
+  color: #2a4365;
+  margin-top: 0.4cm;
+  margin-bottom: 0.2cm;
+  border-bottom: 1px solid #cbd5e0;
+  padding-bottom: 0.1cm;
+}
+
+h3 {
+  font-size: 10pt;
+  color: #2c5282;
+  margin-bottom: 0.1cm;
+  margin-top: 0.1cm;
+}
+
+p {
+  margin-bottom: 0.2cm;
+  margin-top: 0.1cm;
+}
+
+ul {
+  margin-bottom: 0.2cm;
+  margin-top: 0.1cm;
+  padding-left: 0.5cm;
+}
+
+li {
+  margin-bottom: 0.1cm;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #e2e8f0;
+  padding: 0.05cm 0.15cm;
+  margin-right: 0.1cm;
+  margin-bottom: 0.1cm;
+  border-radius: 0.1cm;
+  font-size: 7pt;
+}
+
+.card {
+  margin-bottom: 0.3cm;
+  padding: 0.2cm;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.1cm;
+}
+
+/* Hide elements not needed in PDF */
+header nav,
+footer,
+.download-btn,
+.profile-img-small,
+.profile-img-large {
+  display: none;
+}
+
+/* Ensure content fits on pages nicely */
+section {
+  page-break-inside: avoid;
+  margin-bottom: 0.3cm;
+}
+
+/* Compact layout for skills */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.2cm;
+}
+
+/* Reduce spacing between items */
+.space-y-4 > * + * {
+  margin-top: 0.2cm !important;
+}
+
+.space-y-8 > * + * {
+  margin-top: 0.3cm !important;
+}
+
+.space-y-16 > * + * {
+  margin-top: 0.4cm !important;
+}
+
+/* Compact experience items */
+.experience-item {
+  margin-bottom: 0.2cm;
+}
+
+/* Make sure everything fits on one page */
+main {
+  max-height: 27.7cm;
+  overflow: hidden;
+}
+
+@media print {
+  body {
+    font-size: 9pt;
+  }
+}

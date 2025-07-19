@@ -124,6 +124,8 @@ This repository includes a GitHub Actions workflow that automatically deploys yo
 
 ### Adding a Downloadable PDF Resume
 
+#### Option 1: Upload a PDF File
+
 1. Add your PDF resume to the repository (e.g., `assets/maria-tzanidaki-resume.pdf`)
 2. Update the download button link:
    ```html
@@ -132,6 +134,76 @@ This repository includes a GitHub Actions workflow that automatically deploys yo
      Download CV
    </a>
    ```
+
+#### Option 2: Generate PDF from HTML using Pandoc
+
+You can automatically generate a PDF version of your resume from the HTML file:
+
+1. Install Pandoc (https://pandoc.org/installing.html) and weasyprint
+   ```bash
+   # On macOS
+   brew install pandoc
+   brew install weasyprint
+   ```
+
+2. Run the following command:
+   ```bash
+   pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
+   ```
+   
+   Note: You may see warnings like `Ignored gap: min(4vw, 1.5em)` or `Ignored overflow-x: auto`, but these can be safely ignored as they don't affect the core formatting.
+
+3. This will create a PDF that matches your website content
+4. The included `pdf-styles.css` file contains styles optimized for PDF output
+
+This approach ensures your PDF resume is always in sync with your website content.
+
+#### Option 3: Automate PDF Generation with GitHub Actions
+
+You can set up GitHub Actions to automatically generate the PDF whenever changes are pushed to the main branch:
+
+1. Create a GitHub workflow file at `.github/workflows/generate-pdf.yml`:
+   ```yaml
+   name: Generate PDF Resume
+
+   on:
+     push:
+       branches: [ main ]
+       paths:
+         - 'index.html'
+         - 'pdf-styles.css'
+
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v3
+         
+         - name: Install dependencies
+           run: |
+             sudo apt-get update
+             sudo apt-get install -y pandoc weasyprint
+             
+         - name: Generate PDF
+           run: |
+             pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
+             
+         - name: Commit and push if changed
+           run: |
+             git config --global user.name 'GitHub Actions'
+             git config --global user.email 'actions@github.com'
+             git add assets/maria-tzanidaki-resume.pdf
+             git diff --quiet && git diff --staged --quiet || git commit -m "Update PDF resume"
+             git push
+   ```
+
+2. This workflow will:
+   - Run whenever you push changes to `index.html` or `pdf-styles.css` on the main branch
+   - Install Pandoc and weasyprint
+   - Generate the PDF resume
+   - Commit and push the updated PDF to your repository
+
+This ensures your PDF resume is always up-to-date with your website content.
 
 ### Adding Google Analytics
 
