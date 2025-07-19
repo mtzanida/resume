@@ -110,7 +110,7 @@ This repository includes a GitHub Actions workflow that automatically deploys yo
 
 ### Adding a Profile Picture
 
-1. Add your profile image to the repository (e.g., `images/profile.jpg`)
+1. Add your profile image to the repository (e.g., `images/photo.png`)
 2. Update the HTML to include your image in the header section:
    ```html
    <div class="flex items-center">
