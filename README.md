@@ -263,10 +263,6 @@ This repository initially used a GitHub Action to generate the PDF version of th
 
 ### Setting Up the Pre-commit Hook
 
-There are two ways to set up the pre-commit hook:
-
-#### Option 1: Using the pre-commit framework
-
 1. Install the pre-commit framework:
    ```bash
    pip install pre-commit
@@ -279,21 +275,9 @@ There are two ways to set up the pre-commit hook:
 
 3. The `.pre-commit-config.yaml` file is already configured to run the PDF generation script.
 
-#### Option 2: Using the manual setup
-
-1. Run the setup script to install the pre-commit hook:
-   ```bash
-   ./setup-hooks.sh
-   ```
-
-2. Make sure you have the required dependencies installed:
-   ```bash
-   brew install pandoc weasyprint
-   ```
-
 ### Required Dependencies
 
-For both options, you need:
+You need:
 - pandoc
 - weasyprint
 

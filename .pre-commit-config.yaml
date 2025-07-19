@@ -5,7 +5,7 @@ repos:
         name: Generate PDF Resume
         entry: ./scripts/generate-pdf.sh
         language: script
-        files: '(index\.html|pdf-styles\.css)$'
+        files: '(index\.html|styling/pdf-styles-single-page\.css)$'
         pass_filenames: false
 
   -   repo: https://github.com/pre-commit/pre-commit-hooks
