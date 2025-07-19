@@ -186,16 +186,16 @@ This repository includes a GitHub Actions workflow that automatically generates 
          # Generate PDF resume
          - name: Checkout
            uses: actions/checkout@v3
-           
+
          - name: Install PDF dependencies
            run: |
              sudo apt-get update
              sudo apt-get install -y pandoc weasyprint
-           
+
          - name: Generate PDF
            run: |
              pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
-           
+
          # Commit updated PDF if changed
          - name: Commit PDF if changed
            run: |
@@ -203,16 +203,16 @@ This repository includes a GitHub Actions workflow that automatically generates 
              git config --global user.email 'actions@github.com'
              git add assets/maria-tzanidaki-resume.pdf
              git diff --quiet && git diff --staged --quiet || (git commit -m "Update PDF resume" && git push)
-           
+
          # Deploy to GitHub Pages
          - name: Setup Pages
            uses: actions/configure-pages@v3
-           
+
          - name: Upload artifact
            uses: actions/upload-pages-artifact@v2
            with:
              path: '.'
-           
+
          - name: Deploy to GitHub Pages
            id: deployment
            uses: actions/deploy-pages@v2
