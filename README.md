@@ -150,7 +150,7 @@ You can automatically generate a PDF version of your resume from the HTML file:
    ```bash
    pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
    ```
-   
+
    Note: You may see warnings like `Ignored gap: min(4vw, 1.5em)` or `Ignored overflow-x: auto`, but these can be safely ignored as they don't affect the core formatting.
 
 3. This will create a PDF that matches your website content
@@ -178,16 +178,16 @@ You can set up GitHub Actions to automatically generate the PDF whenever changes
        runs-on: ubuntu-latest
        steps:
          - uses: actions/checkout@v3
-         
+
          - name: Install dependencies
            run: |
              sudo apt-get update
              sudo apt-get install -y pandoc weasyprint
-             
+
          - name: Generate PDF
            run: |
              pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
-             
+
          - name: Commit and push if changed
            run: |
              git config --global user.name 'GitHub Actions'

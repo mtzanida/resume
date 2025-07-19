@@ -1,481 +1,633 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maria Tzanidaki - Cloud Engineer | AWS Certified Architect</title>
-    <meta name="description" content="Maria Tzanidaki - Cloud Engineer specializing in AWS serverless architectures, Terraform, and cloud-native automation">
-    <meta name="keywords" content="cloud engineer, AWS, serverless, Terraform, DevOps, Lambda, Step Functions, EventBridge">
+    <meta
+      name="description"
+      content="Maria Tzanidaki - Cloud Engineer specializing in AWS serverless architectures, Terraform, and cloud-native automation"
+    />
+    <meta
+      name="keywords"
+      content="cloud engineer, AWS, serverless, Terraform, DevOps, Lambda, Step Functions, EventBridge"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gray: {
-                            950: '#030712',
-                            900: '#111827',
-                            800: '#1f2937',
-                            700: '#374151',
-                            600: '#4b5563',
-                            400: '#9ca3af',
-                            300: '#d1d5db',
-                            100: '#f3f4f6',
-                        },
-                        blue: {
-                            400: '#60a5fa',
-                        },
-                        green: {
-                            400: '#34d399',
-                        },
-                        purple: {
-                            400: '#a78bfa',
-                        },
-                        orange: {
-                            400: '#fb923c',
-                            500: '#f97316',
-                        },
-                        yellow: {
-                            400: '#facc15',
-                        },
-                    },
-                },
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gray: {
+                950: "#030712",
+                900: "#111827",
+                800: "#1f2937",
+                700: "#374151",
+                600: "#4b5563",
+                400: "#9ca3af",
+                300: "#d1d5db",
+                100: "#f3f4f6",
+              },
+              blue: {
+                400: "#60a5fa",
+              },
+              green: {
+                400: "#34d399",
+              },
+              purple: {
+                400: "#a78bfa",
+              },
+              orange: {
+                400: "#fb923c",
+                500: "#f97316",
+              },
+              yellow: {
+                400: "#facc15",
+              },
             },
-        }
+          },
+        },
+      };
     </script>
     <style>
-        body {
-            background-color: #030712;
-            color: #f3f4f6;
-        }
-        .card {
-            background-color: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 0.5rem;
-            transition: border-color 0.2s;
-        }
-        .card:hover {
-            border-color: #374151;
-        }
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-        .backdrop-blur-sm {
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-        .profile-img-small {
-            width: 4rem;
-            height: 4rem;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .profile-img-small:hover {
-            transform: scale(1.05);
-        }
-        .profile-img-large {
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .profile-img-large:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.7);
-        }
-        .download-btn {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        .download-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: 0.5s;
-        }
-        .download-btn:hover::after {
-            left: 100%;
-        }
+      body {
+        background-color: #030712;
+        color: #f3f4f6;
+      }
+      .card {
+        background-color: #111827;
+        border: 1px solid #1f2937;
+        border-radius: 0.5rem;
+        transition: border-color 0.2s;
+      }
+      .card:hover {
+        border-color: #374151;
+      }
+      .badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+      .backdrop-blur-sm {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+      }
+      .profile-img-small {
+        width: 4rem;
+        height: 4rem;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+      .profile-img-small:hover {
+        transform: scale(1.05);
+      }
+      .profile-img-large {
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .profile-img-large:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.7);
+      }
+      .download-btn {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .download-btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transition: 0.5s;
+      }
+      .download-btn:hover::after {
+        left: 100%;
+      }
     </style>
-</head>
-<body class="min-h-screen bg-gray-950 text-gray-100">
+  </head>
+  <body class="min-h-screen bg-gray-950 text-gray-100">
     <!-- Header -->
-    <header class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-10">
-        <div class="max-w-4xl mx-auto px-6 py-6">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <img src="images/photo.png" alt="Maria Tzanidaki" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-blue-400 profile-img-small">
-                    <div>
-                        <h1 class="text-3xl font-bold text-white">Maria Tzanidaki</h1>
-                        <p class="text-xl text-gray-400 mt-1">Cloud Engineer | AWS Certified Architect</p>
-                    </div>
-                </div>
-                <a href="assets/maria-tzanidaki-resume.pdf" class="inline-flex items-center px-4 py-2 border border-gray-700 rounded-md hover:bg-gray-800 bg-transparent text-white transition-colors download-btn" download>
-                    <i class="fas fa-download mr-2 w-4 h-4"></i>
-                    Download CV
-                </a>
+    <header
+      class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-10"
+    >
+      <div class="max-w-4xl mx-auto px-6 py-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <img
+              src="images/photo.png"
+              alt="Maria Tzanidaki"
+              class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-blue-400 profile-img-small"
+            />
+            <div>
+              <h1 class="text-3xl font-bold text-white">Maria Tzanidaki</h1>
+              <p class="text-xl text-gray-400 mt-1">
+                Cloud Engineer | AWS Certified Architect
+              </p>
             </div>
+          </div>
+          <a
+            href="assets/maria-tzanidaki-resume.pdf"
+            class="inline-flex items-center px-4 py-2 border border-gray-700 rounded-md hover:bg-gray-800 bg-transparent text-white transition-colors download-btn"
+            download
+          >
+            <i class="fas fa-download mr-2 w-4 h-4"></i>
+            Download CV
+          </a>
         </div>
+      </div>
     </header>
 
     <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
-        <!-- About Section -->
-        <section>
-            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-                <i class="fas fa-cloud text-blue-400 mr-3 w-6 h-6"></i>
-                About
-            </h2>
-            <div class="text-gray-300 text-lg leading-relaxed space-y-4">
-                <p>
-                    Passionate Cloud Engineer with expertise in building serverless architectures and cloud-native automation using AWS Lambda, Step Functions, EventBridge, and Systems Manager. Specialized in improving operational efficiency and developer velocity through scalable event-driven solutions.
-                </p>
-                <p>
-                    My journey in tech began at a code school, which laid the foundation for my career in cloud engineering. I bring a unique blend of technical expertise and creative problem-solving, having experience not only in cloud technologies but also in education and entrepreneurship.
-                </p>
-            </div>
-        </section>
+      <!-- About Section -->
+      <section>
+        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+          <i class="fas fa-cloud text-blue-400 mr-3 w-6 h-6"></i>
+          About
+        </h2>
+        <div class="text-gray-300 text-lg leading-relaxed space-y-4">
+          <p>
+            Passionate Cloud Engineer with expertise in building serverless
+            architectures and cloud-native automation using AWS Lambda, Step
+            Functions, EventBridge, and Systems Manager. Specialized in
+            improving operational efficiency and developer velocity through
+            scalable event-driven solutions.
+          </p>
+          <p>
+            My journey in tech began at a code school, which laid the foundation
+            for my career in cloud engineering. I bring a unique blend of
+            technical expertise and creative problem-solving, having experience
+            not only in cloud technologies but also in education and
+            entrepreneurship.
+          </p>
+        </div>
+      </section>
 
-        <!-- Contact Info -->
-        <section>
-            <h2 class="text-2xl font-semibold text-white mb-6">Contact</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="flex items-center text-gray-300">
-                    <i class="fas fa-envelope text-blue-400 mr-3 w-5 h-5"></i>
-                    maria.tzanidaki@outlook.com
-                </div>
-                <div class="flex items-center text-gray-300">
-                    <i class="fas fa-phone text-blue-400 mr-3 w-5 h-5"></i>
-                    +30 6976081870
-                </div>
-                <div class="flex items-center text-gray-300">
-                    <i class="fas fa-map-marker-alt text-blue-400 mr-3 w-5 h-5"></i>
-                    Thessaloniki, Greece
-                </div>
-                <div class="flex items-center text-gray-300">
-                    <i class="fab fa-linkedin text-blue-400 mr-3 w-5 h-5"></i>
-                    linkedin.com/in/mariatzanidaki
-                </div>
-            </div>
-        </section>
+      <!-- Contact Info -->
+      <section>
+        <h2 class="text-2xl font-semibold text-white mb-6">Contact</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex items-center text-gray-300">
+            <i class="fas fa-envelope text-blue-400 mr-3 w-5 h-5"></i>
+            maria.tzanidaki@outlook.com
+          </div>
+          <div class="flex items-center text-gray-300">
+            <i class="fas fa-phone text-blue-400 mr-3 w-5 h-5"></i>
+            +30 6976081870
+          </div>
+          <div class="flex items-center text-gray-300">
+            <i class="fas fa-map-marker-alt text-blue-400 mr-3 w-5 h-5"></i>
+            Thessaloniki, Greece
+          </div>
+          <div class="flex items-center text-gray-300">
+            <i class="fab fa-linkedin text-blue-400 mr-3 w-5 h-5"></i>
+            linkedin.com/in/mariatzanidaki
+          </div>
+        </div>
+      </section>
 
-        <!-- Skills Section -->
-        <section>
-            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-                <i class="fas fa-code text-green-400 mr-3 w-6 h-6"></i>
-                Technical Skills
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="pb-3 px-6 pt-6">
-                        <h3 class="text-lg text-white">Cloud Platforms</h3>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">AWS</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Azure</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">GCP</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="pb-3 px-6 pt-6">
-                        <h3 class="text-lg text-white">Infrastructure</h3>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Terraform</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">OpenTofu</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">GitOps</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">GitHub Actions</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="pb-3 px-6 pt-6">
-                        <h3 class="text-lg text-white">AWS Services</h3>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Lambda</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Step Functions</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">EventBridge</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Systems Manager</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="pb-3 px-6 pt-6">
-                        <h3 class="text-lg text-white">DevOps</h3>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Docker</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Jenkins</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Git</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">CI/CD</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="pb-3 px-6 pt-6">
-                        <h3 class="text-lg text-white">Programming</h3>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">JavaScript</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">NodeJS</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">OOP</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Algorithms</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="pb-3 px-6 pt-6">
-                        <h3 class="text-lg text-white">Databases</h3>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">SQL</span>
-                            <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">NoSQL</span>
-                        </div>
-                    </div>
-                </div>
+      <!-- Skills Section -->
+      <section>
+        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+          <i class="fas fa-code text-green-400 mr-3 w-6 h-6"></i>
+          Technical Skills
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="pb-3 px-6 pt-6">
+              <h3 class="text-lg text-white">Cloud Platforms</h3>
             </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section>
-            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-                <i class="fas fa-server text-purple-400 mr-3 w-6 h-6"></i>
-                Experience
-            </h2>
-            <div class="space-y-8">
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="px-6 pt-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl text-white">Cloud Engineer</h3>
-                                <p class="text-lg text-blue-400 mt-1">Mondelēz International</p>
-                            </div>
-                            <span class="badge border border-gray-600 text-gray-400">Nov 2022 - Present</span>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 pt-4">
-                        <p class="text-gray-300 mb-4">Specializing in building serverless architectures and cloud-native automation using AWS services.</p>
-                        <ul class="space-y-2">
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Design and implement automation workflows using AWS Lambda, EventBridge, and Step Functions
-                            </li>
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Develop and maintain infrastructure as code using Terraform and OpenTofu
-                            </li>
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Manage CI/CD pipelines with GitHub Actions for secure, automated delivery
-                            </li>
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Lead internal efforts to standardize automation frameworks and improve system costs
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="px-6 pt-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl text-white">Teaching Professional</h3>
-                                <p class="text-lg text-blue-400 mt-1">Epituxia</p>
-                            </div>
-                            <span class="badge border border-gray-600 text-gray-400">Sep 2022 - Dec 2023</span>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 pt-4">
-                        <p class="text-gray-300 mb-4">Taught computer science and object-oriented programming to young students.</p>
-                        <ul class="space-y-2">
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Ignited young minds with the fundamentals of computer science
-                            </li>
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Developed curriculum for object-oriented programming courses
-                            </li>
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Shared technical knowledge and inspired the next generation of coders
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="px-6 pt-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl text-white">Cloud Engineer</h3>
-                                <p class="text-lg text-blue-400 mt-1">Deloitte</p>
-                            </div>
-                            <span class="badge border border-gray-600 text-gray-400">Jan 2020 - Nov 2022</span>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 pt-4">
-                        <p class="text-gray-300 mb-4">Collaborated with industry experts on cutting-edge cloud solutions.</p>
-                        <ul class="space-y-2">
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Architected robust cloud infrastructures for enterprise clients
-                            </li>
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Optimized performance of cloud-based applications and services
-                            </li>
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Tackled complex challenges in public cloud environments
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="px-6 pt-6">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-xl text-white">Development Intern</h3>
-                                <p class="text-lg text-blue-400 mt-1">Deloitte</p>
-                            </div>
-                            <span class="badge border border-gray-600 text-gray-400">Nov 2019 - Jan 2020</span>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 pt-4">
-                        <p class="text-gray-300 mb-4">Immersed in intensive training on market-relevant technologies.</p>
-                        <ul class="space-y-2">
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Learned cloud platforms (GCP, Azure, AWS), JavaScript, and NodeJS
-                            </li>
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Gained experience with SQL, NoSQL, Git, Jenkins, and Docker
-                            </li>
-                            <li class="text-gray-400 flex items-start">
-                                <span class="text-green-400 mr-2">•</span>
-                                Built foundation for future career in cloud engineering
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="px-6 pb-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >AWS</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >Azure</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >GCP</span
+                >
+              </div>
             </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section>
-            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-                <i class="fas fa-database text-orange-400 mr-3 w-6 h-6"></i>
-                Entrepreneurial Projects
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors">
-                    <div class="px-6 pt-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg text-white">SeaWear Boutique</h3>
-                            <span class="badge border border-gray-600 text-gray-400">2020 - 2025</span>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 pt-4">
-                        <p class="text-gray-300 mb-4">Created and ran a seasonal summer business independently, focusing on customer experience and brand identity.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="badge border border-gray-600 text-gray-400">Business Ownership</span>
-                            <span class="badge border border-gray-600 text-gray-400">Store Management</span>
-                            <span class="badge border border-gray-600 text-gray-400">Customer Service</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors">
-                    <div class="px-6 pt-6">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg text-white">Summer Panorama Series</h3>
-                            <span class="badge border border-gray-600 text-gray-400">2019 - 2024</span>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6 pt-4">
-                        <p class="text-gray-300 mb-4">Managed Airbnb properties as part of a family business, hosting travelers from around the world.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="badge border border-gray-600 text-gray-400">Hospitality</span>
-                            <span class="badge border border-gray-600 text-gray-400">Property Management</span>
-                            <span class="badge border border-gray-600 text-gray-400">Problem-Solving</span>
-                        </div>
-                    </div>
-                </div>
-                
+          </div>
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="pb-3 px-6 pt-6">
+              <h3 class="text-lg text-white">Infrastructure</h3>
             </div>
-        </section>
-
-        <!-- Education & Certifications -->
-        <section>
-            <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-                <i class="fas fa-shield-alt text-yellow-400 mr-3 w-6 h-6"></i>
-                Education & Certifications
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="px-6 py-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h3 class="font-semibold text-white">AWS Certified Solutions Architect</h3>
-                                <p class="text-gray-400 text-sm">Amazon Web Services</p>
-                            </div>
-                            <span class="badge bg-orange-500/10 text-orange-400 border border-orange-500/20">2024</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-gray-900 border-gray-800">
-                    <div class="px-6 py-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h3 class="font-semibold text-white">Graduate Software Engineer</h3>
-                                <p class="text-gray-400 text-sm">Alexander Technological Educational Institute of Thessaloniki</p>
-                            </div>
-                            <span class="badge bg-blue-500/10 text-blue-400 border border-blue-500/20">2019</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="px-6 pb-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >Terraform</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >OpenTofu</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >GitOps</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >GitHub Actions</span
+                >
+              </div>
             </div>
-        </section>
+          </div>
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="pb-3 px-6 pt-6">
+              <h3 class="text-lg text-white">AWS Services</h3>
+            </div>
+            <div class="px-6 pb-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >Lambda</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >Step Functions</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >EventBridge</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >Systems Manager</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="pb-3 px-6 pt-6">
+              <h3 class="text-lg text-white">DevOps</h3>
+            </div>
+            <div class="px-6 pb-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >Docker</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >Jenkins</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >Git</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >CI/CD</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="pb-3 px-6 pt-6">
+              <h3 class="text-lg text-white">Programming</h3>
+            </div>
+            <div class="px-6 pb-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >JavaScript</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >NodeJS</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >OOP</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >Algorithms</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="pb-3 px-6 pt-6">
+              <h3 class="text-lg text-white">Databases</h3>
+            </div>
+            <div class="px-6 pb-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >SQL</span
+                >
+                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  >NoSQL</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section>
+        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+          <i class="fas fa-server text-purple-400 mr-3 w-6 h-6"></i>
+          Experience
+        </h2>
+        <div class="space-y-8">
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="px-6 pt-6">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="text-xl text-white">Cloud Engineer</h3>
+                  <p class="text-lg text-blue-400 mt-1">
+                    Mondelēz International
+                  </p>
+                </div>
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Nov 2022 - Present</span
+                >
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4">
+              <p class="text-gray-300 mb-4">
+                Specializing in building serverless architectures and
+                cloud-native automation using AWS services.
+              </p>
+              <ul class="space-y-2">
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Design and implement automation workflows using AWS Lambda,
+                  EventBridge, and Step Functions
+                </li>
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Develop and maintain infrastructure as code using Terraform
+                  and OpenTofu
+                </li>
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Manage CI/CD pipelines with GitHub Actions for secure,
+                  automated delivery
+                </li>
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Lead internal efforts to standardize automation frameworks and
+                  improve system costs
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="px-6 pt-6">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="text-xl text-white">Teaching Professional</h3>
+                  <p class="text-lg text-blue-400 mt-1">Epituxia</p>
+                </div>
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Sep 2022 - Dec 2023</span
+                >
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4">
+              <p class="text-gray-300 mb-4">
+                Taught computer science and object-oriented programming to young
+                students.
+              </p>
+              <ul class="space-y-2">
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Ignited young minds with the fundamentals of computer science
+                </li>
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Developed curriculum for object-oriented programming courses
+                </li>
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Shared technical knowledge and inspired the next generation of
+                  coders
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="px-6 pt-6">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="text-xl text-white">Cloud Engineer</h3>
+                  <p class="text-lg text-blue-400 mt-1">Deloitte</p>
+                </div>
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Jan 2020 - Nov 2022</span
+                >
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4">
+              <p class="text-gray-300 mb-4">
+                Collaborated with industry experts on cutting-edge cloud
+                solutions.
+              </p>
+              <ul class="space-y-2">
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Architected robust cloud infrastructures for enterprise
+                  clients
+                </li>
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Optimized performance of cloud-based applications and services
+                </li>
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Tackled complex challenges in public cloud environments
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="px-6 pt-6">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="text-xl text-white">Development Intern</h3>
+                  <p class="text-lg text-blue-400 mt-1">Deloitte</p>
+                </div>
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Nov 2019 - Jan 2020</span
+                >
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4">
+              <p class="text-gray-300 mb-4">
+                Immersed in intensive training on market-relevant technologies.
+              </p>
+              <ul class="space-y-2">
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Learned cloud platforms (GCP, Azure, AWS), JavaScript, and
+                  NodeJS
+                </li>
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Gained experience with SQL, NoSQL, Git, Jenkins, and Docker
+                </li>
+                <li class="text-gray-400 flex items-start">
+                  <span class="text-green-400 mr-2">•</span>
+                  Built foundation for future career in cloud engineering
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section>
+        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+          <i class="fas fa-database text-orange-400 mr-3 w-6 h-6"></i>
+          Entrepreneurial Projects
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div
+            class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors"
+          >
+            <div class="px-6 pt-6">
+              <div class="flex justify-between items-start">
+                <h3 class="text-lg text-white">SeaWear Boutique</h3>
+                <span class="badge border border-gray-600 text-gray-400"
+                  >2020 - 2025</span
+                >
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4">
+              <p class="text-gray-300 mb-4">
+                Created and ran a seasonal summer business independently,
+                focusing on customer experience and brand identity.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Business Ownership</span
+                >
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Store Management</span
+                >
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Customer Service</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors"
+          >
+            <div class="px-6 pt-6">
+              <div class="flex justify-between items-start">
+                <h3 class="text-lg text-white">Summer Panorama Series</h3>
+                <span class="badge border border-gray-600 text-gray-400"
+                  >2019 - 2024</span
+                >
+              </div>
+            </div>
+            <div class="px-6 pb-6 pt-4">
+              <p class="text-gray-300 mb-4">
+                Managed Airbnb properties as part of a family business, hosting
+                travelers from around the world.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Hospitality</span
+                >
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Property Management</span
+                >
+                <span class="badge border border-gray-600 text-gray-400"
+                  >Problem-Solving</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education & Certifications -->
+      <section>
+        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+          <i class="fas fa-shield-alt text-yellow-400 mr-3 w-6 h-6"></i>
+          Education & Certifications
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="px-6 py-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold text-white">
+                    AWS Certified Solutions Architect
+                  </h3>
+                  <p class="text-gray-400 text-sm">Amazon Web Services</p>
+                </div>
+                <span
+                  class="badge bg-orange-500/10 text-orange-400 border border-orange-500/20"
+                  >2024</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="card bg-gray-900 border-gray-800">
+            <div class="px-6 py-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="font-semibold text-white">
+                    Graduate Software Engineer
+                  </h3>
+                  <p class="text-gray-400 text-sm">
+                    Alexander Technological Educational Institute of
+                    Thessaloniki
+                  </p>
+                </div>
+                <span
+                  class="badge bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                  >2019</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Footer -->
     <footer class="border-t border-gray-800 bg-gray-900/50 mt-16">
-        <div class="max-w-4xl mx-auto px-6 py-8">
-            <div class="flex items-center justify-between">
-                <p class="text-gray-400">© 2025 Maria Tzanidaki. All rights reserved.</p>
-                <div class="flex space-x-4">
-                    <a href="https://github.com/mtzanida" class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
-                        <i class="fab fa-github w-5 h-5"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/maria-tzanidaki/" class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors">
-                        <i class="fab fa-linkedin w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
+      <div class="max-w-4xl mx-auto px-6 py-8">
+        <div class="flex items-center justify-between">
+          <p class="text-gray-400">
+            © 2025 Maria Tzanidaki. All rights reserved.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              href="https://github.com/mtzanida"
+              class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors"
+            >
+              <i class="fab fa-github w-5 h-5"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/maria-tzanidaki/"
+              class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors"
+            >
+              <i class="fab fa-linkedin w-5 h-5"></i>
+            </a>
+          </div>
         </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

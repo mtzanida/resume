@@ -13,16 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc weasyprint
-          
+
       - name: Generate PDF
         run: |
           pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
-          
+
       - name: Commit and push if changed
         run: |
           git config --global user.name 'GitHub Actions'
