@@ -162,41 +162,15 @@ This approach ensures your PDF resume is always in sync with your website conten
 
 #### Option 3: Automate PDF Generation and Deployment with GitHub Actions
 
-This repository includes a GitHub Actions workflow that automatically generates the PDF and deploys your site to GitHub Pages whenever you push changes to the main branch:
+Initially, we considered using a GitHub Actions workflow to automatically generate the PDF and deploy the site to GitHub Pages. However, we ultimately chose to use pre-commit hooks instead (see the "Using Pre-commit Hooks for PDF Generation" section below for details).
 
-1. The workflow file is located at `.github/workflows/resume-workflow.yml`:
-   ```yaml
-   name: Resume Website Workflow
+The original concept was to have a workflow file at `.github/workflows/resume-workflow.yml` that would:
+- Run whenever changes were pushed to the main branch
+- Generate the PDF resume using Pandoc and weasyprint
+- Commit and push the updated PDF to the repository
+- Deploy the website to GitHub Pages
 
-   on:
-     push:
-       branches: [ "main" ]
-     workflow_dispatch:  # Allows manual triggering
-
-   permissions:
-     contents: write  # Needed for updating PDF
-     pages: write
-     id-token: write
-
-   jobs:
-     build-and-deploy:
-       environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-       runs-on: ubuntu-latest
-       steps:
-         # Generate PDF resume
-         - name: Checkout
-           uses: actions/checkout@v3
-
-         - name: Install PDF dependencies
-           run: |
-             sudo apt-get update
-             sudo apt-get install -y pandoc weasyprint
-
-         - name: Generate PDF
-           run: |
-             pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
+However, this approach had several drawbacks compared to using pre-commit hooks, which is why we removed the GitHub Actions workflow in favor of the pre-commit hook solution.
 
          # Commit updated PDF if changed
          - name: Commit PDF if changed
@@ -223,10 +197,7 @@ This repository includes a GitHub Actions workflow that automatically generates 
 2. This workflow will:
    - Run whenever you push changes to the main branch
    - Generate the PDF resume using Pandoc and weasyprint
-   - Commit and push the updated PDF to your repository
-   - Deploy your website to GitHub Pages
-
-This ensures your PDF resume is always up-to-date with your website content and your site is automatically deployed.
+However, this approach had several drawbacks compared to using pre-commit hooks, which is why we removed the GitHub Actions workflow in favor of the pre-commit hook solution.
 
 ### Adding Google Analytics
 
@@ -261,6 +232,12 @@ This repository initially used a GitHub Action to generate the PDF version of th
 
 5. **Faster Development Cycle**: You don't have to wait for GitHub Actions to run to see if the PDF was generated correctly.
 
+6. **Improved Reliability**: By generating the PDF locally, we avoid potential issues with GitHub Actions environment differences or service disruptions.
+
+7. **Better Version Control**: The PDF is always committed alongside the HTML changes that generated it, making the repository history cleaner and more logical.
+
+8. **No Extra Commits**: GitHub Actions would create additional commits just for PDF updates, cluttering the commit history. Pre-commit hooks avoid this by including the PDF in the original commit.
+
 ### Setting Up the Pre-commit Hook
 
 1. Install the pre-commit framework:
@@ -293,10 +270,10 @@ The pre-commit hook expects the styling repository to be available at `../stylin
 ### How It Works
 
 The pre-commit hook:
-1. Checks if you've modified `index.html` or `pdf-styles.css`
+1. Checks if you've modified `index.html` or `styling/pdf-styles-single-page.css`
 2. If so, it generates an updated PDF using pandoc and weasyprint
 3. Incorporates styling from the separate styling repository
-4. Adds the updated PDF to your commit automatically
+4. Adds the generated PDF to your commit automatically
 
 This approach ensures that your PDF is always in sync with your HTML content, without needing to rely on GitHub Actions.
 
