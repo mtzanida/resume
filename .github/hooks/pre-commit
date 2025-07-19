@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Check if index.html or pdf-styles.css have changed
+if git diff --cached --name-only | grep -q "index.html\|pdf-styles.css"; then
+  echo "Detected changes in resume files. Generating updated PDF..."
+  
+  # Check if pandoc and weasyprint are installed
+  if ! command -v pandoc &> /dev/null || ! command -v weasyprint &> /dev/null; then
+    echo "Error: pandoc and/or weasyprint are not installed."
+    echo "Please install them with: brew install pandoc weasyprint"
+    exit 1
+  fi
+  
+  # Generate the PDF
+  pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
+  
+  if [ $? -ne 0 ]; then
+    echo "Error: Failed to generate PDF."
+    exit 1
+  fi
+  
+  # Add the generated PDF to the commit
+  git add assets/maria-tzanidaki-resume.pdf
+  
+  echo "PDF successfully generated and added to commit."
+fi
+
+exit 0

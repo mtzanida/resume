@@ -245,6 +245,45 @@ Add the following code before the closing `</head>` tag:
 
 Replace `YOUR-GA-ID` with your actual Google Analytics tracking ID.
 
+## Using Pre-commit Hooks for PDF Generation
+
+This repository initially used a GitHub Action to generate the PDF version of the resume, but we've switched to using a pre-commit hook instead. Here's why this approach is better:
+
+### Why Pre-commit Hooks vs. GitHub Actions?
+
+1. **Immediate Feedback**: Pre-commit hooks run locally before your commit is finalized, giving you immediate feedback if something goes wrong with PDF generation.
+
+2. **Guaranteed Consistency**: The PDF is always in sync with your HTML content in the same commit. With GitHub Actions, there would be a delay and potentially a separate commit for the PDF update.
+
+3. **Works Offline**: Pre-commit hooks work even when you're coding offline, unlike GitHub Actions which require pushing to the repository.
+
+4. **Reduced Complexity**: No need to maintain a separate workflow file or deal with GitHub Actions permissions and settings.
+
+5. **Faster Development Cycle**: You don't have to wait for GitHub Actions to run to see if the PDF was generated correctly.
+
+### Setting Up the Pre-commit Hook
+
+1. Run the setup script to install the pre-commit hook:
+   ```bash
+   ./setup-hooks.sh
+   ```
+
+2. Make sure you have the required dependencies installed:
+   ```bash
+   brew install pandoc weasyprint
+   ```
+
+3. Now, whenever you make changes to `index.html` or `pdf-styles.css` and commit them, the PDF will be automatically generated and added to your commit.
+
+### How It Works
+
+The pre-commit hook:
+1. Checks if you've modified `index.html` or `pdf-styles.css`
+2. If so, it generates an updated PDF using pandoc and weasyprint
+3. Adds the updated PDF to your commit automatically
+
+This approach ensures that your PDF is always in sync with your HTML content, without needing to rely on GitHub Actions.
+
 ## Maintenance
 
 To update your resume in the future:
