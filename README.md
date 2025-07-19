@@ -162,41 +162,15 @@ This approach ensures your PDF resume is always in sync with your website conten
 
 #### Option 3: Automate PDF Generation and Deployment with GitHub Actions
 
-This repository includes a GitHub Actions workflow that automatically generates the PDF and deploys your site to GitHub Pages whenever you push changes to the main branch:
+Initially, we considered using a GitHub Actions workflow to automatically generate the PDF and deploy the site to GitHub Pages. However, we ultimately chose to use pre-commit hooks instead (see the "Using Pre-commit Hooks for PDF Generation" section below for details).
 
-1. The workflow file is located at `.github/workflows/resume-workflow.yml`:
-   ```yaml
-   name: Resume Website Workflow
+The original concept was to have a workflow file at `.github/workflows/resume-workflow.yml` that would:
+- Run whenever changes were pushed to the main branch
+- Generate the PDF resume using Pandoc and weasyprint
+- Commit and push the updated PDF to the repository
+- Deploy the website to GitHub Pages
 
-   on:
-     push:
-       branches: [ "main" ]
-     workflow_dispatch:  # Allows manual triggering
-
-   permissions:
-     contents: write  # Needed for updating PDF
-     pages: write
-     id-token: write
-
-   jobs:
-     build-and-deploy:
-       environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-       runs-on: ubuntu-latest
-       steps:
-         # Generate PDF resume
-         - name: Checkout
-           uses: actions/checkout@v3
-
-         - name: Install PDF dependencies
-           run: |
-             sudo apt-get update
-             sudo apt-get install -y pandoc weasyprint
-
-         - name: Generate PDF
-           run: |
-             pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css
+However, this approach had several drawbacks compared to using pre-commit hooks, which is why we removed the GitHub Actions workflow in favor of the pre-commit hook solution.
 
          # Commit updated PDF if changed
          - name: Commit PDF if changed
@@ -223,10 +197,7 @@ This repository includes a GitHub Actions workflow that automatically generates 
 2. This workflow will:
    - Run whenever you push changes to the main branch
    - Generate the PDF resume using Pandoc and weasyprint
-   - Commit and push the updated PDF to your repository
-   - Deploy your website to GitHub Pages
-
-This ensures your PDF resume is always up-to-date with your website content and your site is automatically deployed.
+However, this approach had several drawbacks compared to using pre-commit hooks, which is why we removed the GitHub Actions workflow in favor of the pre-commit hook solution.
 
 ### Adding Google Analytics
 
