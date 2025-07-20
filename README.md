@@ -267,15 +267,63 @@ brew install pandoc weasyprint
 
 The pre-commit hook expects the styling repository to be available at `../styling` relative to this repository. If your styling repository is located elsewhere, you'll need to update the path in the script.
 
-### How It Works
+### How the PDF Generation Script Works
 
-The pre-commit hook:
-1. Checks if you've modified `index.html` or `styling/pdf-styles-single-page.css`
-2. If so, it generates an updated PDF using pandoc and weasyprint
-3. Incorporates styling from the separate styling repository
-4. Adds the generated PDF to your commit automatically
+The `scripts/generate-pdf.sh` script uses a sophisticated multi-step process to generate a PDF with proper styling and photo placement:
 
-This approach ensures that your PDF is always in sync with your HTML content, without needing to rely on GitHub Actions.
+1. **Initial Setup**:
+   - Checks for required dependencies (pandoc, weasyprint, pdftk)
+   - Creates the assets directory if it doesn't exist
+
+2. **Content PDF Generation**:
+   - Creates a temporary CSS file that imports the styling from `styling/pdf-styles-single-page.css`
+   - Adds CSS rules to hide any existing photos and download buttons
+   - Generates a content PDF using pandoc and weasyprint with the modified CSS
+
+3. **Photo Layer Creation**:
+   - Creates a temporary HTML file with just the photo
+   - Positions the photo precisely in the top-right corner using absolute positioning
+   - Generates a separate PDF layer with just the photo using weasyprint
+
+4. **Page Manipulation**:
+   - Extracts the first page from the content PDF using pdftk
+   - Extracts any remaining pages (if multi-page resume)
+   - Adds the photo to only the first page using pdftk's background feature
+   - Combines the first page (with photo) with any remaining pages
+
+5. **Finalization**:
+   - Verifies the PDF was created successfully and has content
+   - Adds the generated PDF to the git commit
+   - Cleans up all temporary files and warning logs
+
+This approach ensures that:
+- The photo appears exactly where intended (top-right corner)
+- The photo only appears on the first page
+- All styling from the CSS file is properly applied
+- No duplicate photos or download buttons appear in the PDF
+
+#### Required Dependencies
+
+The script requires the following tools:
+- **pandoc**: For converting HTML to PDF
+- **weasyprint**: As the PDF engine for pandoc
+- **pdftk**: For PDF page manipulation
+
+Install them with:
+```bash
+brew install pandoc weasyprint pdftk-java
+```
+
+#### Troubleshooting PDF Generation
+
+If you encounter issues with PDF generation:
+
+1. **Missing photo**: Ensure your photo is at `images/photo.png` or update the script with the correct path
+2. **Styling issues**: Check that the path to `styling/pdf-styles-single-page.css` is correct
+3. **PDF manipulation errors**: Verify that pdftk is installed and working properly
+4. **Blank or incomplete PDF**: Run the script manually with `./scripts/generate-pdf.sh` to see detailed error messages
+
+The script is designed to be robust and handle various edge cases, including single-page resumes and missing dependencies.
 
 ## Maintenance
 
