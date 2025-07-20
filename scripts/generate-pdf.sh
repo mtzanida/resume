@@ -90,18 +90,28 @@ echo "Generating photo layer..."
 # Generate a transparent PDF with just the photo
 weasyprint $PHOTO_HTML assets/photo_layer.pdf
 
-echo "Combining PDFs..."
-# Use pdftk with the background option instead of stamp
+echo "Extracting first page from content PDF..."
+# Extract just the first page from the content PDF
 if command -v pdftk &> /dev/null; then
-  # Use pdftk to overlay the photo onto the first page
-  pdftk assets/content.pdf background assets/photo_layer.pdf output assets/maria-tzanidaki-resume.pdf
-elif command -v gs &> /dev/null; then
-  # Use ghostscript as an alternative
-  gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=assets/maria-tzanidaki-resume.pdf assets/content.pdf assets/photo_layer.pdf
+  pdftk assets/content.pdf cat 1 output assets/first_page.pdf
+  pdftk assets/content.pdf cat 2-end output assets/rest_pages.pdf 2>/dev/null || touch assets/rest_pages.pdf
 else
-  echo "Error: Neither pdftk nor ghostscript is installed. Cannot combine PDFs."
-  echo "Please install pdftk or ghostscript."
+  echo "Error: pdftk is required for this operation."
   exit 1
+fi
+
+echo "Adding photo to first page only..."
+# Add the photo to just the first page
+pdftk assets/first_page.pdf background assets/photo_layer.pdf output assets/first_page_with_photo.pdf
+
+echo "Combining all pages..."
+# Combine the first page with photo and the rest of the pages
+if [ -s assets/rest_pages.pdf ]; then
+  # If there are additional pages
+  pdftk assets/first_page_with_photo.pdf assets/rest_pages.pdf cat output assets/maria-tzanidaki-resume.pdf
+else
+  # If there's only one page
+  cp assets/first_page_with_photo.pdf assets/maria-tzanidaki-resume.pdf
 fi
 
 # Check if the final PDF was created and has content
@@ -123,7 +133,8 @@ ls -la assets/maria-tzanidaki-resume.pdf
 git add assets/maria-tzanidaki-resume.pdf
 
 # Clean up temporary files
-rm $PHOTO_HTML $TEMP_CSS assets/photo_layer.pdf assets/content.pdf
+rm $PHOTO_HTML $TEMP_CSS assets/photo_layer.pdf assets/content.pdf assets/first_page.pdf assets/first_page_with_photo.pdf
+rm -f assets/rest_pages.pdf
 # Remove any warning logs
 rm -f weasyprint-warnings.log
 
