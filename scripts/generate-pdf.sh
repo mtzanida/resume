@@ -22,23 +22,59 @@ fi
 # Make sure assets directory exists
 mkdir -p assets
 
-# Create a simple HTML file with just the photo
-TEMP_HTML="temp_resume_with_photo.html"
+# Create a temporary CSS file to completely hide any existing photos
+TEMP_CSS="temp_hide_photos.css"
 
-cat > $TEMP_HTML << EOF
+cat > $TEMP_CSS << EOF
+/* Import the original styles */
+@import url("styling/pdf-styles-single-page.css");
+
+/* Hide any existing photos */
+img[src*="photo"] {
+  display: none !important;
+}
+
+/* Hide any download buttons or text */
+.download-btn, [download], a[href$=".pdf"] {
+  display: none !important;
+}
+EOF
+
+echo "Generating content PDF with styling (with photos hidden)..."
+# Generate the main PDF with styling and photos hidden
+pandoc index.html -o assets/content.pdf --pdf-engine=weasyprint --css=$TEMP_CSS --resource-path=.:./images:./styling --embed-resources 2> /dev/null
+
+# Create a simple HTML file with just the photo
+PHOTO_HTML="temp_photo.html"
+
+cat > $PHOTO_HTML << EOF
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Maria Tzanidaki - Resume</title>
+  <title>Photo</title>
   <style>
+    @page {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
     .photo-container {
-      text-align: center;
-      margin-bottom: 20px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
     }
     .photo {
-      max-width: 150px;
-      border-radius: 50%;
+      width: 80px;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      display: block;
     }
   </style>
 </head>
@@ -50,21 +86,18 @@ cat > $TEMP_HTML << EOF
 </html>
 EOF
 
-echo "Generating PDF with photo..."
-# First generate a PDF with just the photo
-weasyprint $TEMP_HTML assets/photo.pdf
-
-echo "Generating main resume PDF..."
-# Then generate the main resume PDF
-pandoc index.html -o assets/main_resume.pdf --pdf-engine=weasyprint --css=styling/pdf-styles-single-page.css --resource-path=.:./images:./styling --embed-resources 2> weasyprint-warnings.log
+echo "Generating photo layer..."
+# Generate a transparent PDF with just the photo
+weasyprint $PHOTO_HTML assets/photo_layer.pdf
 
 echo "Combining PDFs..."
-# Now combine the PDFs using pdftk if available
+# Use pdftk with the background option instead of stamp
 if command -v pdftk &> /dev/null; then
-  pdftk assets/photo.pdf assets/main_resume.pdf cat output assets/maria-tzanidaki-resume.pdf
+  # Use pdftk to overlay the photo onto the first page
+  pdftk assets/content.pdf background assets/photo_layer.pdf output assets/maria-tzanidaki-resume.pdf
 elif command -v gs &> /dev/null; then
-  # Alternative using ghostscript
-  gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=assets/maria-tzanidaki-resume.pdf assets/photo.pdf assets/main_resume.pdf
+  # Use ghostscript as an alternative
+  gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=assets/maria-tzanidaki-resume.pdf assets/content.pdf assets/photo_layer.pdf
 else
   echo "Error: Neither pdftk nor ghostscript is installed. Cannot combine PDFs."
   echo "Please install pdftk or ghostscript."
@@ -90,11 +123,9 @@ ls -la assets/maria-tzanidaki-resume.pdf
 git add assets/maria-tzanidaki-resume.pdf
 
 # Clean up temporary files
-rm $TEMP_HTML
-rm assets/photo.pdf
-rm assets/main_resume.pdf
+rm $PHOTO_HTML $TEMP_CSS assets/photo_layer.pdf assets/content.pdf
+# Remove any warning logs
+rm -f weasyprint-warnings.log
 
 echo "PDF successfully generated and added to commit."
 exit 0
-
-
