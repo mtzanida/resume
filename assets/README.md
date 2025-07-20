@@ -24,7 +24,7 @@ pandoc index.html -o assets/maria-tzanidaki-resume.pdf
 For better PDF formatting, you can use additional options:
 
 ```bash
-pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=wkhtmltopdf --css=pdf-styles.css
+pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=wkhtmltopdf --css=/styling/pdf-styles.css
 ```
 
 You can create a `pdf-styles.css` file with custom styles for the PDF output.

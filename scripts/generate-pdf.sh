@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Starting PDF generation script..."
+echo "Current working directory: $(pwd)"
 
 # Always generate the PDF regardless of which files changed
 # This ensures we don't miss any changes and the PDF is always up-to-date
@@ -18,28 +19,33 @@ if ! command -v weasyprint &> /dev/null; then
   exit 1
 fi
 
-# Check if styling repository is available
-STYLING_REPO_PATH="../styling"  # Adjust this path to where your styling repository is located
-if [ ! -d "$STYLING_REPO_PATH" ]; then
-  echo "Warning: Styling repository not found at $STYLING_REPO_PATH"
-  echo "PDF generation might not include all styling elements."
-else
-  echo "Using styling files from: $STYLING_REPO_PATH"
-  # Copy necessary styling files if needed
-  # cp $STYLING_REPO_PATH/pdf-styles.css ./pdf-styles.css
-fi
-
 # Make sure assets directory exists
 mkdir -p assets
 
-echo "Generating PDF..."
-# Generate the PDF with verbose output to help debug any issues
-pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint --css=pdf-styles.css -v
+# Remove any existing PDF to ensure we don't get confused by an old file
+if [ -f "assets/maria-tzanidaki-resume.pdf" ]; then
+  echo "Removing existing PDF file..."
+  rm assets/maria-tzanidaki-resume.pdf
+fi
 
-if [ $? -ne 0 ]; then
-  echo "Error: Failed to generate PDF."
+echo "Generating PDF..."
+# Use the simplified command that you confirmed works
+pandoc index.html -o assets/maria-tzanidaki-resume.pdf --pdf-engine=weasyprint
+
+# Check if the PDF was actually created and has content
+if [ ! -f "assets/maria-tzanidaki-resume.pdf" ]; then
+  echo "Error: PDF file was not created."
   exit 1
 fi
+
+# Check if the PDF has content
+if [ ! -s "assets/maria-tzanidaki-resume.pdf" ]; then
+  echo "Error: PDF file was created but is empty."
+  exit 1
+fi
+
+echo "PDF file details:"
+ls -la assets/maria-tzanidaki-resume.pdf
 
 # Add the generated PDF to the commit
 git add assets/maria-tzanidaki-resume.pdf
