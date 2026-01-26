@@ -73,7 +73,12 @@ fi
 
 # Install Python packages
 echo "Using $PIP_CMD to install packages..."
-$PIP_CMD install -r requirements.txt
+if [ -f "requirements.txt" ]; then
+  $PIP_CMD install -r requirements.txt
+else
+  echo "Error: requirements.txt not found"
+  exit 1
+fi
 
 # Verify installations
 echo ""
@@ -90,8 +95,8 @@ else
   MISSING_DEPS=1
 fi
 
-if command_exists weasyprint; then
-  echo "✓ weasyprint: $(weasyprint --version)"
+if python3 -c "import weasyprint" 2>/dev/null; then
+  echo "✓ weasyprint: $(python3 -c 'import weasyprint; print(weasyprint.__version__)')"
 else
   echo "✗ weasyprint: NOT FOUND"
   MISSING_DEPS=1
@@ -106,6 +111,8 @@ fi
 
 if command_exists pre-commit; then
   echo "✓ pre-commit: $(pre-commit --version)"
+elif python3 -c "import pre_commit" 2>/dev/null; then
+  echo "✓ pre-commit: installed via pip"
 else
   echo "✗ pre-commit: NOT FOUND"
   MISSING_DEPS=1
