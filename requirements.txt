@@ -1,0 +1,12 @@
+# System dependencies required for PDF generation
+# Install using: ./scripts/install-dependencies.sh
+
+# Required tools:
+# - pandoc: Document converter
+# - weasyprint: PDF rendering engine
+# - pdftk-java: PDF manipulation tool
+# - pre-commit: Git hook framework
+
+# Python packages (installed via pip)
+pre-commit>=3.0.0
+weasyprint>=60.0
