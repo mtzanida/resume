@@ -1,79 +1,62 @@
-# Maria Tzanidaki - Resume Website
+# Maria Tzanidaki — Resume Website
 
-A personal resume website with automatic PDF generation.
-
-## Quick Start
-
-1. **Install dependencies**:
-   ```bash
-   ./scripts/install-dependencies.sh
-   pre-commit install
-   ```
-
-2. **Customize your resume**:
-   - Edit `index.html` with your information
-   - Replace `images/photo.png` with your photo
-
-3. **Test locally**:
-   ```bash
-   open index.html
-   ```
-
-4. **Deploy**:
-   ```bash
-   git add .
-   git commit -m "Update resume"
-   git push origin main
-   ```
-
-The PDF is automatically generated on commit and saved to `assets/maria-tzanidaki-resume.pdf`.
-
-## GitHub Pages Setup
-
-1. Go to your repository Settings > Pages
-2. Select "Deploy from a branch"
-3. Choose "main" branch and "/ (root)" folder
-4. Your site will be at `https://yourusername.github.io/resume/`
+A personal resume website presenting Maria Tzanidaki's cloud engineering
+background, technical skills, work experience, projects, education and
+certifications. Visitors can browse the resume online and download a PDF copy.
 
 ## Features
 
-- Responsive design with Tailwind CSS
-- Dark theme with modern UI
-- Automatic PDF generation via pre-commit hook
-- Mobile-friendly layout
+- Responsive, dark-themed layout built with HTML, Tailwind CSS and client-side JavaScript.
+- Professional profile photo and contact links.
+- Downloadable PDF resume stored alongside the website.
+- Local PDF generation from the HTML source, with dedicated print styles.
+- An optional pre-commit hook that regenerates the PDF when matching source files change.
 
-## Customization
+## Project structure
 
-Edit `index.html` sections:
-- **Header**: Name and title
-- **About**: Professional summary
-- **Contact**: Email, phone, LinkedIn
-- **Skills**: Technical competencies
-- **Experience**: Work history
-- **Projects**: Notable projects
-- **Education**: Degrees and certifications
+| Location | Purpose |
+| --- | --- |
+| [index.html](index.html) | Website entry point and resume content |
+| [images/](images/) | Profile photo and image assets |
+| [assets/](assets/) | Downloadable PDF resume |
+| [styling/](styling/) | PDF-specific stylesheets |
+| [scripts/](scripts/) | Dependency installation and PDF generation |
+| [initial-draft/](initial-draft/) | Earlier TSX draft, separate from the static website |
+| [docs/SETUP.md](docs/SETUP.md) | Setup, customization, PDF generation, publishing and troubleshooting |
 
-## PDF Generation
+## Architecture
 
-The pre-commit hook automatically generates a PDF when you commit changes to `index.html` or CSS files.
-
-**Dependencies** (installed via `install-dependencies.sh`):
-- pandoc
-- weasyprint
-- pdftk-java
-- pre-commit
-
-**Manual generation**:
-```bash
-./scripts/generate-pdf.sh
+```mermaid
+flowchart TD
+    HTML["Resume source: index.html"]
+    Photo["Profile photo"]
+    CSS["PDF styles"]
+    Hook["Local pre-commit hook or manual command"]
+    Generator["Pandoc, WeasyPrint and pdftk"]
+    PDF["Generated PDF in assets/"]
+    Repo["Committed static website"]
+    Pages["GitHub Pages"]
+    Visitor["Visitor browser"]
+    HTML --> Hook
+    CSS --> Hook
+    Hook --> Generator
+    HTML --> Generator
+    Photo --> Generator
+    CSS --> Generator
+    Generator --> PDF
+    HTML --> Repo
+    Photo --> Repo
+    PDF --> Repo
+    Repo -->|"Branch-based publishing when configured"| Pages
+    Visitor -->|"View resume or download PDF"| Pages
 ```
 
-## Troubleshooting
+PDF generation runs on the contributor's machine after dependencies and hooks are
+installed. The repository contains no GitHub Actions workflow for generating PDFs.
+GitHub Pages can serve the committed static files without an application server
+or database; its live configuration is not verified by this diagram.
 
-- **PDF generation fails**: Run `./scripts/install-dependencies.sh` to verify all dependencies are installed
-- **Changes not appearing**: Check the Actions tab for deployment errors
-- **Styling issues**: Verify Tailwind CSS classes and HTML syntax
+## Reuse
 
-## License
-
-Free to use as a template for your own resume.
+Free to use as a template for your own resume. See the
+[setup and customization guide](docs/SETUP.md) for instructions.
