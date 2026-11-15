@@ -37,20 +37,13 @@ if [[ "$OS" == "Darwin" ]] || [[ "$OS" == "Linux" ]]; then
     echo "✓ pandoc already installed"
   fi
   
-  # Install pdftk-java
-  if ! command_exists pdftk; then
-    echo "Installing pdftk-java..."
-    brew install pdftk-java
-  else
-    echo "✓ pdftk already installed"
-  fi
-  
+
 else
   echo "Unsupported OS: $OS"
   echo "Please install dependencies manually:"
   echo "  - pandoc"
   echo "  - weasyprint"
-  echo "  - pdftk"
+  echo "  - Python packages from requirements.txt"
   exit 1
 fi
 
@@ -102,10 +95,10 @@ else
   MISSING_DEPS=1
 fi
 
-if command_exists pdftk; then
-  echo "✓ pdftk: installed"
+if python3 -c "import pypdf, markdown" 2>/dev/null; then
+  echo "✓ pypdf and Markdown installed"
 else
-  echo "✗ pdftk: NOT FOUND"
+  echo "✗ pypdf or Markdown missing"
   MISSING_DEPS=1
 fi
 

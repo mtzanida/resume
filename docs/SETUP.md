@@ -1,113 +1,118 @@
-# Setup and Customization Guide
+# Resume Content and Publishing Guide
 
 [Back to project overview](../README.md)
 
-## Preview the website
+## Edit content in Markdown
 
-The website is static HTML and does not require a build step. From the repository
-root, open `index.html` in a browser, or serve it locally:
+Edit `content/resume.md` rather than generated `index.html`. The file has named
+sections (Profile, About, Contact, Skills, Experience, Education, Projects, Footer)
+and named fields under `##` headings. Keep the headings intact: they map to slots
+in `templates/index.html`. Change the paragraphs underneath them.
 
-```bash
-python3 -m http.server 8000
+Example:
+
+```markdown
+# About
+
+## Section title 1
+
+Summary
+
+## Paragraph 1
+
+Cloud Engineer working with **AWS**, Terraform and automation.
 ```
 
-Open http://localhost:8000. External styles and icons require internet access.
+Fields support Unicode, ampersands, plain text, **bold**, *italic* and inline code.
+Each field must be one paragraph; lists, links and raw HTML are not supported as
+formatting. HTML text is escaped. The existing cards, achievement bullets and
+badges are supplied by the template. To add a new card/achievement, add a matching
+named field and template slot; unknown, missing, empty or duplicate fields fail
+instead of silently losing resume content. Contact link destinations and metadata
+remain in the template, so update those there when changing identity or URLs.
 
-## Customize the resume
+## Install dependencies
 
-Update the sections in `index.html`:
-
-| Section | Content |
-| --- | --- |
-| Header and About | Name, professional title and summary |
-| Contact | Email, phone and professional links |
-| Skills | Technical competencies |
-| Experience | Work history |
-| Projects | Selected projects |
-| Education | Degrees and certifications |
-
-Replace `images/photo.png` with your photo. Review the page title, metadata, image
-alternative text and PDF download link when adapting the project for another person.
-The included `initial-draft/index.tsx` is not built into the published HTML site.
-
-## Install PDF tooling
-
-The provided installer supports macOS and Linux with Homebrew already installed,
-plus Python 3 and pip. It installs Pandoc and pdftk-java through Homebrew and Python
-packages from `requirements.txt`.
-
-Run from the repository root:
+Use Python 3.11+ and Pandoc, plus WeasyPrint's native libraries for your platform.
+The provided installer uses Homebrew on macOS/Linux; activate your preferred
+Python virtual environment before running it:
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ./scripts/install-dependencies.sh
 pre-commit install
 ```
 
-If managing Python dependencies in a virtual environment, activate it before
-running the installer and keep it active when using the hooks. WeasyPrint may
-also require native libraries for your platform; inspect its error output if
-installation or rendering fails.
+Python dependencies are in `requirements.txt`. PDF composition uses pypdf;
+pdftk/Java are no longer required.
 
-## Generate the PDF
+## Generate and preview
 
-Run from the repository root:
+From the repository root:
 
 ```bash
-./scripts/generate-pdf.sh
+bash scripts/md-to-html.sh
+python3 -m http.server 8000
 ```
 
-The script uses Pandoc and WeasyPrint to render the resume with
-`styling/pdf-styles-single-page.css`, creates a separate photo layer, and uses
-pdftk to add the photo to the first page. The output is:
+Open http://localhost:8000. The HTML retains the existing styling and uses external
+Tailwind and icon CDNs. Change presentation in `templates/index.html`, not the
+generated file. The initial TSX draft is not part of this build.
 
-`assets/maria-tzanidaki-resume.pdf`
+Generate the matching downloadable PDF:
 
-**The script also stages the generated PDF with `git add`, including when run
-manually.** Inspect the PDF and staged changes before committing. If changing the
-output filename, update both the script and the website's download link.
+```bash
+bash scripts/generate-pdf.sh
+```
 
-The stylesheet name does not guarantee a single-page PDF. Check page count,
-clipping, typography, links and photo placement after changing resume content.
+This first regenerates HTML, then renders it with Pandoc/WeasyPrint and the existing
+print stylesheet. pypdf adds the photo to the first page. The output is
+`assets/maria-tzanidaki-resume.pdf`; the shell script stages that PDF with `git add`.
+Review all pages for clipping and photo placement before committing. A failed build
+does not replace the existing PDF.
 
-## Automatic generation on commit
+## Local hooks and checks
 
-After `pre-commit install`, the PDF hook runs when staged files match
-`index.html` or `styling/pdf-styles-single-page.css`. It does not automatically
-run for every CSS file or for photo-only changes. Regenerate manually after
-changing the photo or other inputs not covered by the hook.
+The HTML hook runs before PDF generation for Markdown/template/converter changes.
+The PDF hook also covers the photo, PDF stylesheet and generation scripts. Review
+and stage generated `index.html` and hook changes, then retry the commit if
+pre-commit reports modified files. If Prettier changes a source/template, rerun the
+build before committing.
 
-Other hooks fix whitespace, check YAML and file size, and format HTML/CSS/JavaScript.
-If a hook modifies files, review and stage them, then retry the commit.
-If formatting changed `index.html` after PDF generation, regenerate and review
-the PDF again so both versions match.
+```bash
+python -m unittest discover -s tests -v
+bash scripts/md-to-html.sh --check
+```
 
-## Publish with GitHub Pages
+## Automatic build and deployment
 
-1. In repository **Settings → Pages**, select **Deploy from a branch**.
-2. Select the `main` branch and `/ (root)` folder, then save.
-3. Commit the reviewed website changes and generated PDF to your working branch.
-4. Merge through your normal review process into the configured publishing branch.
-5. Check the Pages deployment status and the URL reported in repository settings.
+`.github/workflows/resume.yml` runs tests and builds HTML/PDF for relevant PRs.
+PRs do not commit or deploy. On main, or manual dispatch from main, it commits
+changed generated files and explicitly deploys a Pages artifact. It does not rely
+on a bot commit triggering another workflow. A failed build prevents deployment.
 
-For this repository, the expected project-site URL is
-https://mtzanida.github.io/resume/ when default GitHub Pages publishing is enabled.
-Confirm the actual URL in settings if a custom domain is configured.
+One-time repository configuration:
 
-There is no checked-in GitHub Actions workflow for PDF generation. Publishing
-serves the committed PDF; it does not regenerate it.
+1. In Settings → Pages, set Source to **GitHub Actions** (replace branch publishing).
+2. Allow the workflow to write repository contents and deploy to the `github-pages`
+   environment. If main is protected, its rules must permit the generated-output
+   commit; otherwise that step fails without deploying. Review those settings
+   yourself; this PR does not modify repository permissions or rules.
+3. Merge reviewed source changes into main and check the Build resume workflow.
+
+Only `index.html`, images and the PDF are included in the Pages artifact. Confirm
+the live URL in repository settings; the expected default project URL is
+https://mtzanida.github.io/resume/.
 
 ## Troubleshooting
 
-- **Missing PDF tools:** run the installer or check that `pandoc`, `weasyprint`,
-  `pdftk` and `pre-commit` are on your PATH.
-- **PDF rendering fails:** inspect the command output and native WeasyPrint
-  dependencies. The generator suppresses Pandoc stderr; rerun the relevant
-  command without that redirection if you need its diagnostics.
-- **PDF appears outdated:** regenerate manually, inspect it and commit the result.
-  Photo-only changes do not trigger the configured PDF hook.
-- **Commit stops after formatting:** review and stage hook changes, regenerate
-  the PDF if the source changed, then retry.
-- **Published changes do not appear:** confirm the Pages branch/folder, deployment
-  status and whether both the HTML and PDF were committed.
-- **Website styling is missing:** check external stylesheet/CDN requests and HTML
-  syntax. Browser styles and PDF styles are separate.
+- **Field mismatch:** restore heading names or add the matching template slot.
+- **Unsupported formatting:** use one paragraph with inline bold, italic or code.
+- **Stale HTML:** run the converter and stage `index.html`.
+- **Missing tools:** check Python requirements, Pandoc and native WeasyPrint libraries.
+- **PDF failure:** inspect the visible Pandoc/WeasyPrint error; the old PDF is preserved.
+- **Workflow cannot commit:** inspect write permissions, branch rules and concurrent
+  changes. Pushes reject a stale branch instead of overwriting changes.
+- **Pages deployment fails:** confirm GitHub Actions is selected as the Pages source
+  and the github-pages environment allows main.

@@ -1,0 +1,86 @@
+name: Build resume
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'templates/**'
+      - 'scripts/**'
+      - 'styling/**'
+      - 'images/**'
+      - 'requirements.txt'
+      - '.github/workflows/resume.yml'
+  pull_request:
+    paths:
+      - 'content/**'
+      - 'templates/**'
+      - 'scripts/**'
+      - 'styling/**'
+      - 'images/**'
+      - 'requirements.txt'
+      - '.github/workflows/resume.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: resume-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc libpango-1.0-0 libpangoft2-1.0-0
+          python -m pip install -r requirements.txt
+      - name: Test Markdown conversion
+        run: python -m unittest discover -s tests -v
+      - name: Generate HTML and PDF
+        run: |
+          bash scripts/md-to-html.sh
+          bash scripts/generate-pdf.sh
+      - name: Commit generated files
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html assets/maria-tzanidaki-resume.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: regenerate resume HTML and PDF'
+            git push origin HEAD:main
+          fi
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p public/assets public/images
+          cp index.html public/
+          cp assets/maria-tzanidaki-resume.pdf public/assets/
+          cp -r images/. public/images/
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        with:
+          path: public
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

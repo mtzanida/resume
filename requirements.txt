@@ -4,9 +4,13 @@
 # Required tools:
 # - pandoc: Document converter
 # - weasyprint: PDF rendering engine
-# - pdftk-java: PDF manipulation tool
+# - pypdf: PDF page composition (Python package below)
 # - pre-commit: Git hook framework
 
 # Python packages (installed via pip)
 pre-commit>=3.0.0
 weasyprint>=60.0
+
+# Markdown-to-HTML conversion
+Markdown==3.7
+pypdf==6.2.0

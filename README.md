@@ -9,14 +9,17 @@ certifications. Visitors can browse the resume online and download a PDF copy.
 - Responsive, dark-themed layout built with HTML, Tailwind CSS and client-side JavaScript.
 - Professional profile photo and contact links.
 - Downloadable PDF resume stored alongside the website.
-- Local PDF generation from the HTML source, with dedicated print styles.
+- Markdown content converted into the existing HTML layout.
+- Local PDF generation from the generated HTML, with dedicated print styles.
 - An optional pre-commit hook that regenerates the PDF when matching source files change.
 
 ## Project structure
 
 | Location | Purpose |
 | --- | --- |
-| [index.html](index.html) | Website entry point and resume content |
+| [content/resume.md](content/resume.md) | Editable resume text in Markdown |
+| [templates/index.html](templates/index.html) | Existing website layout and styling |
+| [index.html](index.html) | Generated website entry point |
 | [images/](images/) | Profile photo and image assets |
 | [assets/](assets/) | Downloadable PDF resume |
 | [styling/](styling/) | PDF-specific stylesheets |
@@ -28,15 +31,21 @@ certifications. Visitors can browse the resume online and download a PDF copy.
 
 ```mermaid
 flowchart TD
-    HTML["Resume source: index.html"]
+    Markdown["Resume content: Markdown"]
+    Template["HTML template"]
+    Build["Markdown converter"]
+    HTML["Generated website: index.html"]
     Photo["Profile photo"]
     CSS["PDF styles"]
     Hook["Local pre-commit hook or manual command"]
-    Generator["Pandoc, WeasyPrint and pdftk"]
+    Generator["Pandoc, WeasyPrint and pypdf"]
     PDF["Generated PDF in assets/"]
     Repo["Committed static website"]
     Pages["GitHub Pages"]
     Visitor["Visitor browser"]
+    Markdown --> Build
+    Template --> Build
+    Build --> HTML
     HTML --> Hook
     CSS --> Hook
     Hook --> Generator
@@ -47,13 +56,13 @@ flowchart TD
     HTML --> Repo
     Photo --> Repo
     PDF --> Repo
-    Repo -->|"Branch-based publishing when configured"| Pages
+    Repo -->|"Build workflow and Pages artifact"| Pages
     Visitor -->|"View resume or download PDF"| Pages
 ```
 
-PDF generation runs on the contributor's machine after dependencies and hooks are
-installed. The repository contains no GitHub Actions workflow for generating PDFs.
-GitHub Pages can serve the committed static files without an application server
+PDF generation runs locally with the installed tools and in GitHub Actions. The Build resume workflow regenerates HTML/PDF, commits the outputs on main and
+deploys a dedicated GitHub Pages artifact.
+GitHub Pages serves the generated static files without an application server
 or database; its live configuration is not verified by this diagram.
 
 ## Reuse

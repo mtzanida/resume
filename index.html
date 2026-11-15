@@ -1,23 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maria Tzanidaki - Cloud Engineer | AWS Certified Architect</title>
-    <meta
-      name="description"
-      content="Maria Tzanidaki - Cloud Engineer specializing in AWS serverless architectures, Terraform, and cloud-native automation"
-    />
-    <meta
-      name="keywords"
-      content="cloud engineer, AWS, serverless, Terraform, DevOps, Lambda, Step Functions, EventBridge"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <script>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Maria Tzanidaki - Cloud Engineer | AWS Certified Architect</title>
+<meta content="Maria Tzanidaki - Cloud Engineer specializing in AWS serverless architectures, Terraform, and cloud-native automation" name="description"/>
+<meta content="cloud engineer, AWS, serverless, Terraform, DevOps, Lambda, Step Functions, EventBridge" name="keywords"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script>
       tailwind.config = {
         theme: {
           extend: {
@@ -53,7 +45,7 @@
         },
       };
     </script>
-    <style>
+<style>
       body {
         background-color: #030712;
         color: #f3f4f6;
@@ -125,404 +117,240 @@
         left: 100%;
       }
     </style>
-  </head>
-  <body class="min-h-screen bg-gray-950 text-gray-100">
-    <!-- Header -->
-    <header
-      class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-10"
-    >
-      <div class="max-w-4xl mx-auto px-6 py-6">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <img
-              src="images/photo.png"
-              alt="Maria Tzanidaki"
-              class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-blue-400 profile-img-small"
-            />
-            <div>
-              <h1 class="text-3xl font-bold text-white">Maria Tzanidaki</h1>
-              <p class="text-xl text-gray-400 mt-1">
-                Cloud Engineer | AWS Certified Architect
-              </p>
-            </div>
-          </div>
-          <a
-            href="assets/maria-tzanidaki-resume.pdf"
-            class="inline-flex items-center px-4 py-2 border border-gray-700 rounded-md hover:bg-gray-800 bg-transparent text-white transition-colors download-btn"
-            download
-          >
-            <i class="fas fa-download mr-2 w-4 h-4"></i>
-            Download CV
-          </a>
-        </div>
-      </div>
-    </header>
-
-    <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
-      <!-- Summary Section -->
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-          <i class="fas fa-cloud text-blue-400 mr-3 w-6 h-6"></i>
-          Summary
-        </h2>
-        <div class="text-gray-300 text-lg leading-relaxed">
-          <p>
-            Experienced Cloud Engineer with advanced expertise in architecting
-            and implementing cost-efficient serverless and cloud-native
-            automation for modern enterprises at scale. Adept at designing and
-            deploying Infrastructure as Code with Terraform and OpenTofu for
-            improved agility, governance, and efficiency. Proven track record
-            driving cost optimization strategies across cloud environments,
-            leveraging automation and financial best practices to maximize
-            infrastructure value and reduce operational expenses.
-          </p>
-        </div>
-      </section>
-
-      <!-- Contact Info -->
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-6">Contact</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="flex items-center text-gray-300">
-            <i class="fas fa-envelope text-blue-400 mr-3 w-5 h-5"></i>
-            mariatzanidaki@outlook.com
-          </div>
-          <div class="flex items-center text-gray-300">
-            <i class="fas fa-phone text-blue-400 mr-3 w-5 h-5"></i>
-            +30 6976081870
-          </div>
-          <div class="flex items-center text-gray-300">
-            <i class="fas fa-map-marker-alt text-blue-400 mr-3 w-5 h-5"></i>
-            Thessaloniki, Greece
-          </div>
-          <div class="flex items-center text-gray-300">
-            <i class="fab fa-linkedin text-blue-400 mr-3 w-5 h-5"></i>
-            <a
-              href="https://www.linkedin.com/in/maria-tzanidaki/"
-              class="hover:text-blue-400 transition-colors"
-              >linkedin.com/in/maria-tzanidaki/</a
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Skills Section -->
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-          <i class="fas fa-code text-green-400 mr-3 w-6 h-6"></i>
-          Technical Capabilities
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="card bg-gray-900 border-gray-800">
-            <div class="pb-3 px-6 pt-6">
-              <h3 class="text-lg text-white">Cloud Platforms & Architecture</h3>
-            </div>
-            <div class="px-6 pb-6">
-              <div class="flex flex-wrap gap-2">
-                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  >Certified AWS Solutions Architect - Associate</span
-                >
-                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  >Google Cloud Platform Associate</span
-                >
-              </div>
-            </div>
-          </div>
-          <div class="card bg-gray-900 border-gray-800">
-            <div class="pb-3 px-6 pt-6">
-              <h3 class="text-lg text-white">Development & Automation</h3>
-            </div>
-            <div class="px-6 pb-6">
-              <div class="flex flex-wrap gap-2">
-                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  >Terraform / OpenTofu</span
-                >
-                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  >Python / Unix - PowerShell scripts</span
-                >
-                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  >Amazon Q / Kiro</span
-                >
-              </div>
-            </div>
-          </div>
-          <div class="card bg-gray-900 border-gray-800">
-            <div class="pb-3 px-6 pt-6">
-              <h3 class="text-lg text-white">DevOps & Infrastructure</h3>
-            </div>
-            <div class="px-6 pb-6">
-              <div class="flex flex-wrap gap-2">
-                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  >Spacelift IaC Management Platform</span
-                >
-                <span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700"
-                  >Github - Github actions</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Experience Section -->
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-          <i class="fas fa-server text-purple-400 mr-3 w-6 h-6"></i>
-          Experience
-        </h2>
-        <div class="space-y-8">
-          <div class="card bg-gray-900 border-gray-800">
-            <div class="px-6 pt-6">
-              <div class="flex justify-between items-start">
-                <div>
-                  <h3 class="text-xl text-white">Cloud Engineer</h3>
-                  <p class="text-lg text-blue-400 mt-1">
-                    Mondelēz International
-                  </p>
-                </div>
-                <span class="badge border border-gray-600 text-gray-400"
-                  >November 2022 – Present</span
-                >
-              </div>
-            </div>
-            <div class="px-6 pb-6 pt-4">
-              <p class="text-gray-300 mb-4">
-                Contributed to global transformation initiatives including cloud
-                migrations, cost optimization through FinOps automation, and
-                implementation of enterprise security standards across
-                large-scale environments.
-              </p>
-              <ul class="space-y-2">
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Developed Terraform modules for infrastructure automation,
-                  achieving significant cost reductions through automated
-                  resource scheduling and optimization.
-                </li>
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Designed secure deployment workflows using GitHub Actions and
-                  temporary credentials, enabling efficient multi-team
-                  collaboration.
-                </li>
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Implemented organizational guardrails including policy
-                  enforcement and code quality checks to prevent security risks
-                  and misconfigurations.
-                </li>
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Led cost optimization initiatives using AWS services,
-                  achieving substantial savings through resource rightsizing and
-                  automated cleanup processes.
-                </li>
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Coordinated internal training and developed onboarding guides
-                  to facilitate knowledge transfer and best practices.
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card bg-gray-900 border-gray-800">
-            <div class="px-6 pt-6">
-              <div class="flex justify-between items-start">
-                <div>
-                  <h3 class="text-xl text-white">Cloud Engineer</h3>
-                  <p class="text-lg text-blue-400 mt-1">Deloitte</p>
-                </div>
-                <span class="badge border border-gray-600 text-gray-400"
-                  >January 2020 – November 2022</span
-                >
-              </div>
-            </div>
-            <div class="px-6 pb-6 pt-4">
-              <ul class="space-y-2">
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Led backend integration projects designing APIs and
-                  architecture with Python and Node.js for enterprise clients in
-                  regulated industries.
-                </li>
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Developed internal backend solutions using custom APIs,
-                  optimizing operational workflows and system reliability.
-                </li>
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Engineered reporting solutions leveraging PL/SQL and Oracle
-                  Cloud technologies, enabling real-time visibility into
-                  business metrics.
-                </li>
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Delivered front-end application projects, translating
-                  requirements into intuitive interfaces with cloud-native
-                  components.
-                </li>
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Architected resilient cloud infrastructures and orchestrated
-                  cross-functional partnerships.
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card bg-gray-900 border-gray-800">
-            <div class="px-6 pt-6">
-              <div class="flex justify-between items-start">
-                <div>
-                  <h3 class="text-xl text-white">Cloud Engineering Intern</h3>
-                  <p class="text-lg text-blue-400 mt-1">Deloitte</p>
-                </div>
-                <span class="badge border border-gray-600 text-gray-400"
-                  >November 2019 – January 2020</span
-                >
-              </div>
-            </div>
-            <div class="px-6 pb-6 pt-4">
-              <ul class="space-y-2">
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Completed an intensive training in leading cloud platforms
-                  (GCP, Azure, AWS), programming languages (JavaScript, NodeJS),
-                  and integration technologies (SQL, NoSQL, Git, Jenkins,
-                  Docker, Mulesoft, Dell Boomi).
-                </li>
-                <li class="text-gray-400 flex items-start">
-                  <span class="text-green-400 mr-2">➔</span>
-                  Developed my first cloud-based application as a practical
-                  demonstration of acquired knowledge, which was instrumental in
-                  securing my hire at the company.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Education & Certifications -->
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-          <i class="fas fa-shield-alt text-yellow-400 mr-3 w-6 h-6"></i>
-          Education
-        </h2>
-        <div class="grid grid-cols-1 gap-4">
-          <div class="card bg-gray-900 border-gray-800">
-            <div class="px-6 py-6">
-              <div class="flex items-center justify-between">
-                <div>
-                  <h3 class="font-semibold text-white">
-                    BS Information and Electronic Engineering
-                  </h3>
-                  <p class="text-gray-400 text-sm">
-                    International Hellenic University
-                  </p>
-                  <p class="text-gray-400 text-sm">
-                    Concentration in Artificial Intelligence
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Projects Section -->
-      <section>
-        <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
-          <i class="fas fa-database text-orange-400 mr-3 w-6 h-6"></i>
-          Entrepreneurial Projects
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div
-            class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors"
-          >
-            <div class="px-6 pt-6">
-              <div class="flex justify-between items-start">
-                <h3 class="text-lg text-white">SeaWear Boutique</h3>
-                <span class="badge border border-gray-600 text-gray-400"
-                  >2020 - 2025</span
-                >
-              </div>
-            </div>
-            <div class="px-6 pb-6 pt-4">
-              <p class="text-gray-300 mb-4">
-                Created and ran a seasonal summer business independently,
-                focusing on customer experience and brand identity.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span class="badge border border-gray-600 text-gray-400"
-                  >Problem Solving</span
-                >
-                <span class="badge border border-gray-600 text-gray-400"
-                  >Team Management</span
-                >
-                <span class="badge border border-gray-600 text-gray-400"
-                  >Customer Service</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors"
-          >
-            <div class="px-6 pt-6">
-              <div class="flex justify-between items-start">
-                <h3 class="text-lg text-white">Summer Panorama Series</h3>
-                <span class="badge border border-gray-600 text-gray-400"
-                  >2019 - 2024</span
-                >
-              </div>
-            </div>
-            <div class="px-6 pb-6 pt-4">
-              <p class="text-gray-300 mb-4">
-                Managed Airbnb properties as part of a family business, hosting
-                travelers from around the world.
-              </p>
-              <div class="flex flex-wrap gap-2">
-                <span class="badge border border-gray-600 text-gray-400"
-                  >Organization skills</span
-                >
-                <span class="badge border border-gray-600 text-gray-400"
-                  >Crisis Management</span
-                >
-                <span class="badge border border-gray-600 text-gray-400"
-                  >Problem-Solving</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-gray-800 bg-gray-900/50 mt-16">
-      <div class="max-w-4xl mx-auto px-6 py-8">
-        <div class="flex items-center justify-between">
-          <p class="text-gray-400">
-            © 2025 Maria Tzanidaki. All rights reserved.
-          </p>
-          <div class="flex space-x-4">
-            <a
-              href="https://github.com/mtzanida"
-              class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors"
-            >
-              <i class="fab fa-github w-5 h-5"></i>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/maria-tzanidaki/"
-              class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors"
-            >
-              <i class="fab fa-linkedin w-5 h-5"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </body>
+</head>
+<body class="min-h-screen bg-gray-950 text-gray-100">
+<!-- Header -->
+<header class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-10">
+<div class="max-w-4xl mx-auto px-6 py-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<img alt="Maria Tzanidaki" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-blue-400 profile-img-small" src="images/photo.png"/>
+<div>
+<h1 class="text-3xl font-bold text-white">Maria Tzanidaki</h1>
+<p class="text-xl text-gray-400 mt-1">Cloud Engineer | AWS Certified Architect</p>
+</div>
+</div>
+<a class="inline-flex items-center px-4 py-2 border border-gray-700 rounded-md hover:bg-gray-800 bg-transparent text-white transition-colors download-btn" download="" href="assets/maria-tzanidaki-resume.pdf">
+<i class="fas fa-download mr-2 w-4 h-4"></i>Download CV</a>
+</div>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+<!-- Summary Section -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-cloud text-blue-400 mr-3 w-6 h-6"></i>Summary</h2>
+<div class="text-gray-300 text-lg leading-relaxed">
+<p>Experienced Cloud Engineer with advanced expertise in architecting and implementing cost-efficient serverless and cloud-native automation for modern enterprises at scale. Adept at designing and deploying Infrastructure as Code with Terraform and OpenTofu for improved agility, governance, and efficiency. Proven track record driving cost optimization strategies across cloud environments, leveraging automation and financial best practices to maximize infrastructure value and reduce operational expenses.</p>
+</div>
+</section>
+<!-- Contact Info -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6">Contact</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex items-center text-gray-300">
+<i class="fas fa-envelope text-blue-400 mr-3 w-5 h-5"></i>mariatzanidaki@outlook.com</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-phone text-blue-400 mr-3 w-5 h-5"></i>+30 6976081870</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-map-marker-alt text-blue-400 mr-3 w-5 h-5"></i>Thessaloniki, Greece</div>
+<div class="flex items-center text-gray-300">
+<i class="fab fa-linkedin text-blue-400 mr-3 w-5 h-5"></i>
+<a class="hover:text-blue-400 transition-colors" href="https://www.linkedin.com/in/maria-tzanidaki/">linkedin.com/in/maria-tzanidaki/</a>
+</div>
+</div>
+</section>
+<!-- Skills Section -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-code text-green-400 mr-3 w-6 h-6"></i>Technical Capabilities</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card bg-gray-900 border-gray-800">
+<div class="pb-3 px-6 pt-6">
+<h3 class="text-lg text-white">Cloud Platforms &amp; Architecture</h3>
+</div>
+<div class="px-6 pb-6">
+<div class="flex flex-wrap gap-2">
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Certified AWS Solutions Architect - Associate</span>
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Google Cloud Platform Associate</span>
+</div>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800">
+<div class="pb-3 px-6 pt-6">
+<h3 class="text-lg text-white">Development &amp; Automation</h3>
+</div>
+<div class="px-6 pb-6">
+<div class="flex flex-wrap gap-2">
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Terraform / OpenTofu</span>
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Python / Unix - PowerShell scripts</span>
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Amazon Q / Kiro</span>
+</div>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800">
+<div class="pb-3 px-6 pt-6">
+<h3 class="text-lg text-white">DevOps &amp; Infrastructure</h3>
+</div>
+<div class="px-6 pb-6">
+<div class="flex flex-wrap gap-2">
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Spacelift IaC Management Platform</span>
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">Github - Github actions</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Experience Section -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-server text-purple-400 mr-3 w-6 h-6"></i>Experience</h2>
+<div class="space-y-8">
+<div class="card bg-gray-900 border-gray-800">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-xl text-white">Cloud Engineer</h3>
+<p class="text-lg text-blue-400 mt-1">Mondelēz International</p>
+</div>
+<span class="badge border border-gray-600 text-gray-400">November 2022 – Present</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<p class="text-gray-300 mb-4">Contributed to global transformation initiatives including cloud migrations, cost optimization through FinOps automation, and implementation of enterprise security standards across large-scale environments.</p>
+<ul class="space-y-2">
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Developed Terraform modules for infrastructure automation, achieving significant cost reductions through automated resource scheduling and optimization.</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Designed secure deployment workflows using GitHub Actions and temporary credentials, enabling efficient multi-team collaboration.</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Implemented organizational guardrails including policy enforcement and code quality checks to prevent security risks and misconfigurations.</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Led cost optimization initiatives using AWS services, achieving substantial savings through resource rightsizing and automated cleanup processes.</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Coordinated internal training and developed onboarding guides to facilitate knowledge transfer and best practices.</li>
+</ul>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-xl text-white">Cloud Engineer</h3>
+<p class="text-lg text-blue-400 mt-1">Deloitte</p>
+</div>
+<span class="badge border border-gray-600 text-gray-400">January 2020 – November 2022</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<ul class="space-y-2">
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Led backend integration projects designing APIs and architecture with Python and Node.js for enterprise clients in regulated industries.</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Developed internal backend solutions using custom APIs, optimizing operational workflows and system reliability.</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Engineered reporting solutions leveraging PL/SQL and Oracle Cloud technologies, enabling real-time visibility into business metrics.</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Delivered front-end application projects, translating requirements into intuitive interfaces with cloud-native components.</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Architected resilient cloud infrastructures and orchestrated cross-functional partnerships.</li>
+</ul>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-xl text-white">Cloud Engineering Intern</h3>
+<p class="text-lg text-blue-400 mt-1">Deloitte</p>
+</div>
+<span class="badge border border-gray-600 text-gray-400">November 2019 – January 2020</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<ul class="space-y-2">
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Completed an intensive training in leading cloud platforms (GCP, Azure, AWS), programming languages (JavaScript, NodeJS), and integration technologies (SQL, NoSQL, Git, Jenkins, Docker, Mulesoft, Dell Boomi).</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>Developed my first cloud-based application as a practical demonstration of acquired knowledge, which was instrumental in securing my hire at the company.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Education & Certifications -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-shield-alt text-yellow-400 mr-3 w-6 h-6"></i>Education</h2>
+<div class="grid grid-cols-1 gap-4">
+<div class="card bg-gray-900 border-gray-800">
+<div class="px-6 py-6">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-semibold text-white">BS Information and Electronic Engineering</h3>
+<p class="text-gray-400 text-sm">International Hellenic University</p>
+<p class="text-gray-400 text-sm">Concentration in Artificial Intelligence</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-database text-orange-400 mr-3 w-6 h-6"></i>Entrepreneurial Projects</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<h3 class="text-lg text-white">SeaWear Boutique</h3>
+<span class="badge border border-gray-600 text-gray-400">2020 - 2025</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<p class="text-gray-300 mb-4">Created and ran a seasonal summer business independently, focusing on customer experience and brand identity.</p>
+<div class="flex flex-wrap gap-2">
+<span class="badge border border-gray-600 text-gray-400">Problem Solving</span>
+<span class="badge border border-gray-600 text-gray-400">Team Management</span>
+<span class="badge border border-gray-600 text-gray-400">Customer Service</span>
+</div>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<h3 class="text-lg text-white">Summer Panorama Series</h3>
+<span class="badge border border-gray-600 text-gray-400">2019 - 2024</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<p class="text-gray-300 mb-4">Managed Airbnb properties as part of a family business, hosting travelers from around the world.</p>
+<div class="flex flex-wrap gap-2">
+<span class="badge border border-gray-600 text-gray-400">Organization skills</span>
+<span class="badge border border-gray-600 text-gray-400">Crisis Management</span>
+<span class="badge border border-gray-600 text-gray-400">Problem-Solving</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="border-t border-gray-800 bg-gray-900/50 mt-16">
+<div class="max-w-4xl mx-auto px-6 py-8">
+<div class="flex items-center justify-between">
+<p class="text-gray-400">© 2025 Maria Tzanidaki. All rights reserved.</p>
+<div class="flex space-x-4">
+<a class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors" href="https://github.com/mtzanida">
+<i class="fab fa-github w-5 h-5"></i>
+</a>
+<a class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors" href="https://www.linkedin.com/in/maria-tzanidaki/">
+<i class="fab fa-linkedin w-5 h-5"></i>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</body>
 </html>

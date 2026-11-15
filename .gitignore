@@ -2,3 +2,8 @@
 node_modules/
 .env
 *.log
+
+# Python build/test caches
+__pycache__/
+*.pyc
+.venv/

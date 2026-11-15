@@ -1,11 +1,17 @@
 repos:
   - repo: local
     hooks:
+      - id: generate-html
+        name: Generate HTML Resume
+        entry: bash scripts/md-to-html.sh
+        language: script
+        files: '^(content/resume\.md|templates/index\.html|scripts/(render_resume\.py|md-to-html\.sh))$'
+        pass_filenames: false
       - id: generate-pdf
         name: Generate PDF Resume
         entry: ./scripts/generate-pdf.sh
         language: script
-        files: '(index\.html|styling/pdf-styles-single-page\.css)$'
+        files: '^(index\.html|content/resume\.md|templates/index\.html|scripts/(render_resume\.py|md-to-html\.sh|generate-pdf\.sh|render_pdf\.py)|styling/pdf-styles-single-page\.css|images/photo\.png)$'
         pass_filenames: false
 
   -   repo: https://github.com/pre-commit/pre-commit-hooks
