@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Maria Tzanidaki - Cloud Engineer | AWS Certified Architect</title>
+<meta content="Maria Tzanidaki - Cloud Engineer specializing in AWS serverless architectures, Terraform, and cloud-native automation" name="description"/>
+<meta content="cloud engineer, AWS, serverless, Terraform, DevOps, Lambda, Step Functions, EventBridge" name="keywords"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gray: {
+                950: "#030712",
+                900: "#111827",
+                800: "#1f2937",
+                700: "#374151",
+                600: "#4b5563",
+                400: "#9ca3af",
+                300: "#d1d5db",
+                100: "#f3f4f6",
+              },
+              blue: {
+                400: "#60a5fa",
+              },
+              green: {
+                400: "#34d399",
+              },
+              purple: {
+                400: "#a78bfa",
+              },
+              orange: {
+                400: "#fb923c",
+                500: "#f97316",
+              },
+              yellow: {
+                400: "#facc15",
+              },
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      body {
+        background-color: #030712;
+        color: #f3f4f6;
+      }
+      .card {
+        background-color: #111827;
+        border: 1px solid #1f2937;
+        border-radius: 0.5rem;
+        transition: border-color 0.2s;
+      }
+      .card:hover {
+        border-color: #374151;
+      }
+      .badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+      .backdrop-blur-sm {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+      }
+      .profile-img-small {
+        width: 4rem;
+        height: 4rem;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+      .profile-img-small:hover {
+        transform: scale(1.05);
+      }
+      .profile-img-large {
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .profile-img-large:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.7);
+      }
+      .download-btn {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .download-btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transition: 0.5s;
+      }
+      .download-btn:hover::after {
+        left: 100%;
+      }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-950 text-gray-100">
+<!-- Header -->
+<header class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-10">
+<div class="max-w-4xl mx-auto px-6 py-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<img alt="Maria Tzanidaki" class="w-16 h-16 rounded-full mr-4 object-cover border-2 border-blue-400 profile-img-small" src="images/photo.png"/>
+<div>
+<h1 class="text-3xl font-bold text-white">{{ profile.name-1 }}</h1>
+<p class="text-xl text-gray-400 mt-1">{{ profile.paragraph-1 }}</p>
+</div>
+</div>
+<a class="inline-flex items-center px-4 py-2 border border-gray-700 rounded-md hover:bg-gray-800 bg-transparent text-white transition-colors download-btn" download="" href="assets/maria-tzanidaki-resume.pdf">
+<i class="fas fa-download mr-2 w-4 h-4"></i>{{ profile.link-text-1 }}</a>
+</div>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+<!-- Summary Section -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-cloud text-blue-400 mr-3 w-6 h-6"></i>{{ about.section-title-1 }}</h2>
+<div class="text-gray-300 text-lg leading-relaxed">
+<p>{{ about.paragraph-1 }}</p>
+</div>
+</section>
+<!-- Contact Info -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6">{{ contact.section-title-1 }}</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex items-center text-gray-300">
+<i class="fas fa-envelope text-blue-400 mr-3 w-5 h-5"></i>{{ contact.contact-detail-1 }}</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-phone text-blue-400 mr-3 w-5 h-5"></i>{{ contact.contact-detail-2 }}</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-map-marker-alt text-blue-400 mr-3 w-5 h-5"></i>{{ contact.contact-detail-3 }}</div>
+<div class="flex items-center text-gray-300">
+<i class="fab fa-linkedin text-blue-400 mr-3 w-5 h-5"></i>
+<a class="hover:text-blue-400 transition-colors" href="https://www.linkedin.com/in/maria-tzanidaki/">{{ contact.link-text-1 }}</a>
+</div>
+</div>
+</section>
+<!-- Skills Section -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-code text-green-400 mr-3 w-6 h-6"></i>{{ skills.section-title-1 }}</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card bg-gray-900 border-gray-800">
+<div class="pb-3 px-6 pt-6">
+<h3 class="text-lg text-white">{{ skills.title-1 }}</h3>
+</div>
+<div class="px-6 pb-6">
+<div class="flex flex-wrap gap-2">
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">{{ skills.badge-1 }}</span>
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">{{ skills.badge-2 }}</span>
+</div>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800">
+<div class="pb-3 px-6 pt-6">
+<h3 class="text-lg text-white">{{ skills.title-2 }}</h3>
+</div>
+<div class="px-6 pb-6">
+<div class="flex flex-wrap gap-2">
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">{{ skills.badge-3 }}</span>
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">{{ skills.badge-4 }}</span>
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">{{ skills.badge-5 }}</span>
+</div>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800">
+<div class="pb-3 px-6 pt-6">
+<h3 class="text-lg text-white">{{ skills.title-3 }}</h3>
+</div>
+<div class="px-6 pb-6">
+<div class="flex flex-wrap gap-2">
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">{{ skills.badge-6 }}</span>
+<span class="badge bg-gray-800 text-gray-300 hover:bg-gray-700">{{ skills.badge-7 }}</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Experience Section -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-server text-purple-400 mr-3 w-6 h-6"></i>{{ experience.section-title-1 }}</h2>
+<div class="space-y-8">
+<div class="card bg-gray-900 border-gray-800">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-xl text-white">{{ experience.title-1 }}</h3>
+<p class="text-lg text-blue-400 mt-1">{{ experience.paragraph-1 }}</p>
+</div>
+<span class="badge border border-gray-600 text-gray-400">{{ experience.badge-1 }}</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<p class="text-gray-300 mb-4">{{ experience.paragraph-2 }}</p>
+<ul class="space-y-2">
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-1 }}</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-2 }}</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-3 }}</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-4 }}</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-5 }}</li>
+</ul>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-xl text-white">{{ experience.title-2 }}</h3>
+<p class="text-lg text-blue-400 mt-1">{{ experience.paragraph-3 }}</p>
+</div>
+<span class="badge border border-gray-600 text-gray-400">{{ experience.badge-2 }}</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<ul class="space-y-2">
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-6 }}</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-7 }}</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-8 }}</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-9 }}</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-10 }}</li>
+</ul>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-xl text-white">{{ experience.title-3 }}</h3>
+<p class="text-lg text-blue-400 mt-1">{{ experience.paragraph-4 }}</p>
+</div>
+<span class="badge border border-gray-600 text-gray-400">{{ experience.badge-3 }}</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<ul class="space-y-2">
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-11 }}</li>
+<li class="text-gray-400 flex items-start">
+<span class="text-green-400 mr-2">➔</span>{{ experience.achievement-12 }}</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Education & Certifications -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-shield-alt text-yellow-400 mr-3 w-6 h-6"></i>{{ education.section-title-1 }}</h2>
+<div class="grid grid-cols-1 gap-4">
+<div class="card bg-gray-900 border-gray-800">
+<div class="px-6 py-6">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-semibold text-white">{{ education.title-1 }}</h3>
+<p class="text-gray-400 text-sm">{{ education.paragraph-1 }}</p>
+<p class="text-gray-400 text-sm">{{ education.paragraph-2 }}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section -->
+<section>
+<h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+<i class="fas fa-database text-orange-400 mr-3 w-6 h-6"></i>{{ projects.section-title-1 }}</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<h3 class="text-lg text-white">{{ projects.title-1 }}</h3>
+<span class="badge border border-gray-600 text-gray-400">{{ projects.badge-1 }}</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<p class="text-gray-300 mb-4">{{ projects.paragraph-1 }}</p>
+<div class="flex flex-wrap gap-2">
+<span class="badge border border-gray-600 text-gray-400">{{ projects.badge-2 }}</span>
+<span class="badge border border-gray-600 text-gray-400">{{ projects.badge-3 }}</span>
+<span class="badge border border-gray-600 text-gray-400">{{ projects.badge-4 }}</span>
+</div>
+</div>
+</div>
+<div class="card bg-gray-900 border-gray-800 hover:border-gray-700 transition-colors">
+<div class="px-6 pt-6">
+<div class="flex justify-between items-start">
+<h3 class="text-lg text-white">{{ projects.title-2 }}</h3>
+<span class="badge border border-gray-600 text-gray-400">{{ projects.badge-5 }}</span>
+</div>
+</div>
+<div class="px-6 pb-6 pt-4">
+<p class="text-gray-300 mb-4">{{ projects.paragraph-2 }}</p>
+<div class="flex flex-wrap gap-2">
+<span class="badge border border-gray-600 text-gray-400">{{ projects.badge-6 }}</span>
+<span class="badge border border-gray-600 text-gray-400">{{ projects.badge-7 }}</span>
+<span class="badge border border-gray-600 text-gray-400">{{ projects.badge-8 }}</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="border-t border-gray-800 bg-gray-900/50 mt-16">
+<div class="max-w-4xl mx-auto px-6 py-8">
+<div class="flex items-center justify-between">
+<p class="text-gray-400">{{ footer.paragraph-1 }}</p>
+<div class="flex space-x-4">
+<a class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors" href="https://github.com/mtzanida">
+<i class="fab fa-github w-5 h-5"></i>
+</a>
+<a class="text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-800 transition-colors" href="https://www.linkedin.com/in/maria-tzanidaki/">
+<i class="fab fa-linkedin w-5 h-5"></i>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</body>
+</html>
