@@ -1,62 +1,23 @@
-# Maria Tzanidaki — Resume Website
+# Maria Tzanidaki: Resume Website
 
-A personal resume website presenting Maria Tzanidaki's cloud engineering
-background, technical skills, work experience, projects, education and
-certifications. Visitors can browse the resume online and download a PDF copy.
+A static HTML resume presenting Maria's cloud-engineering experience, skills, projects and certifications, with a responsive layout and external CSS/icon assets.
 
-## Features
-
-- Responsive, dark-themed layout built with HTML, Tailwind CSS and client-side JavaScript.
-- Professional profile photo and contact links.
-- Downloadable PDF resume stored alongside the website.
-- Local PDF generation from the HTML source, with dedicated print styles.
-- An optional pre-commit hook that regenerates the PDF when matching source files change.
-
-## Project structure
-
-| Location | Purpose |
-| --- | --- |
-| [index.html](index.html) | Website entry point and resume content |
-| [images/](images/) | Profile photo and image assets |
-| [assets/](assets/) | Downloadable PDF resume |
-| [styling/](styling/) | PDF-specific stylesheets |
-| [scripts/](scripts/) | Dependency installation and PDF generation |
-| [initial-draft/](initial-draft/) | Earlier TSX draft, separate from the static website |
-| [docs/SETUP.md](docs/SETUP.md) | Setup, customization, PDF generation, publishing and troubleshooting |
+**Status:** The default branch serves HTML directly. PDF generation is unfinished: the generator is a placeholder and the linked PDF/profile image are not checked in. A Markdown-based build is proposed separately in PR #8.
 
 ## Architecture
 
 ```mermaid
 flowchart TD
-    HTML["Resume source: index.html"]
-    Photo["Profile photo"]
-    CSS["PDF styles"]
-    Hook["Local pre-commit hook or manual command"]
-    Generator["Pandoc, WeasyPrint and pdftk"]
-    PDF["Generated PDF in assets/"]
-    Repo["Committed static website"]
-    Pages["GitHub Pages"]
-    Visitor["Visitor browser"]
-    HTML --> Hook
-    CSS --> Hook
-    Hook --> Generator
-    HTML --> Generator
-    Photo --> Generator
-    CSS --> Generator
-    Generator --> PDF
-    HTML --> Repo
-    Photo --> Repo
-    PDF --> Repo
-    Repo -->|"Branch-based publishing when configured"| Pages
-    Visitor -->|"View resume or download PDF"| Pages
+  Source["index.html resume content"] --> Server["Local or configured static hosting"]
+  Server --> Browser["Visitor browser"]
+  Tailwind["Tailwind CSS CDN"] --> Browser
+  Icons["Font Awesome CDN"] --> Browser
+  Browser --> Profile["LinkedIn and GitHub profile links"]
+  Future["PDF generator: unfinished"] -.-> PDF["Referenced PDF download: not checked in"]
 ```
 
-PDF generation runs on the contributor's machine after dependencies and hooks are
-installed. The repository contains no GitHub Actions workflow for generating PDFs.
-GitHub Pages can serve the committed static files without an application server
-or database; its live configuration is not verified by this diagram.
+## Start here
 
-## Reuse
+Run `python3 -m http.server 8000` and open the local site. Edit [index.html](index.html) for the current implementation. Review [the proposed Markdown/PDF workflow](https://github.com/mtzanida/resume/pull/8) separately; it is not part of this branch. [docs/SETUP.md](docs/SETUP.md) retains the existing setup notes.
 
-Free to use as a template for your own resume. See the
-[setup and customization guide](docs/SETUP.md) for instructions.
+[Previous README and detailed reference](https://github.com/mtzanida/resume/blob/7527f470426f405721cf05ea969217ff0a14b848/README.md) are retained in Git history. They may describe older assumptions or unmerged plans; the scope above reflects this branch.
